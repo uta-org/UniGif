@@ -8,7 +8,6 @@ namespace UnityGif.Editor
     public class GifFileEditor : PropertyDrawer
     {
         private UniGif.GifFile gif;
-        // private DefaultAsset asset;
 
         private Texture texture;
 
