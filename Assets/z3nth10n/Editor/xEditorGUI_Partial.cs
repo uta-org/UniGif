@@ -4,68 +4,36 @@ namespace z3nth10n.EditorUtils
 {
     public sealed partial class xEditorGUI
     {
-        // private Rect _position;
-
-        //private Rect _position
-        //{
-        //    get
-        //    {
-        //        return rect;
-        //    }
-        //    set
-        //    {
-        //        rect = value;
-
-        //        if (m_maxHeight < rect.y)
-        //            m_maxHeight = rect.y;
-        //    }
-        //}
-
         private float m_maxWidth, m_maxHeight;
-
-        //private GUIStyle defaultLabelStyle;
-
-        //public GUIStyle DefaultLabelStyle
-        //{
-        //    get
-        //    {
-        //        if (defaultLabelStyle == null)
-        //            defaultLabelStyle = GUI.skin.label;
-
-        //        // UpdateHeight(defaultLabelStyle.lineHeight);
-
-        //        return defaultLabelStyle;
-        //    }
-        //}
 
         // WIP: Wrapper for all GUI elements
 
-        public Rect DefaultLabelStyle(string label)
+        public Rect DefaultLabelStyle(string label, bool expand = true)
         {
-            return DefaultLabelStyle(new GUIContent(label));
+            return DefaultLabelStyle(new GUIContent(label), expand);
         }
 
-        public Rect DefaultLabelStyle(GUIContent content)
+        public Rect DefaultLabelStyle(GUIContent content, bool expand = true)
         {
             Vector2 vector = GUI.skin.label.CalcSize(content);
 
             _position.y += vector.y;
-            _position.width = vector.x;
+            _position.width = expand ? m_maxWidth - 25 : vector.x;
 
             return _position;
         }
 
-        public Rect DefaultButtonStyle(string label)
+        public Rect DefaultButtonStyle(string label, bool expand = true)
         {
-            return DefaultButtonStyle(new GUIContent(label));
+            return DefaultButtonStyle(new GUIContent(label), expand);
         }
 
-        public Rect DefaultButtonStyle(GUIContent content)
+        public Rect DefaultButtonStyle(GUIContent content, bool expand = true)
         {
             Vector2 vector = GUI.skin.button.CalcSize(content);
 
             _position.y += vector.y;
-            _position.width = vector.x;
+            _position.width = expand ? m_maxWidth - 25 : vector.x;
 
             return _position;
         }
@@ -93,6 +61,7 @@ namespace z3nth10n.EditorUtils
             width = Mathf.Max(width, Screen.width);
             height = style.CalcHeight(content, width);
 
+            UpdateMaxWidth(width);
             IncrementHeight(height);
 
             _position.width = width;
