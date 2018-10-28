@@ -196,30 +196,6 @@ namespace UnityGif
             return InternalCallbackEditor(array);
         }
 
-        //private static IEnumerator LoadFromEditor(string path)
-        //{
-        //    if (string.IsNullOrEmpty(path))
-        //        throw new ArgumentException("path");
-
-        //    if (path.StartsWith("http"))
-        //        yield return LoadGifFromUrl(path);
-        //    else
-        //    {
-        //        if (!Path.IsPathRooted(path))
-        //        {
-        //            TextAsset textAsset = Resources.Load<TextAsset>(path);
-        //            string streamingAssetsPath = Path.Combine(Application.streamingAssetsPath, path);
-
-        //            if (textAsset != null)
-        //                yield return LoadGifFromResources(path, textAsset.bytes);
-        //            else if (File.Exists(streamingAssetsPath))
-        //                yield return LoadGifFromFile(streamingAssetsPath);
-        //            else
-        //                Debug.LogErrorFormat("File '{0}' hasn't been found!", path);
-        //        }
-        //    }
-        //}
-
         public static void LoadFrom(this MonoBehaviour mono, GifFile gif)
         {
             if (mono == null)
@@ -341,24 +317,10 @@ namespace UnityGif
                 wrapperData.width = w;
                 wrapperData.height = h;
 
-                // if (!string.IsNullOrEmpty(path))
                 gifTexDict.Add(path, wrapperData);
             },
             wrapperData.filterMode, wrapperData.wrapMode, wrapperData.outputDebugLog);
         }
-
-        //private static void DrawGif(this MonoBehaviour mono, Rect r, Gif gif)
-        //{
-        //    if (!gifTexDict.ContainsKey(gif.path) && !gif.FlagAsLoaded())
-        //        LoadFrom(mono, gif);
-        //    else if (gifTexDict.ContainsKey(gif.path))
-        //        Draw(r, gifTexDict[gif.path]);
-        //}
-
-        //public static void Draw(Rect r, string path)
-        //{
-        //    Draw(r, gifTexDict.ContainsKey(path) ? gifTexDict[path] : null);
-        //}
 
         private static void Draw(Rect r, WrapperData data)
         {
