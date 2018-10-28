@@ -9,7 +9,6 @@ using Object = UnityEngine.Object;
 
 namespace z3nth10n.EditorUtils
 {
-
     public static class FEditor
     {
         public static void AddOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
@@ -21,8 +20,7 @@ namespace z3nth10n.EditorUtils
         }
     }
 
-
-    public class StyleWrapper
+    public sealed class StyleWrapper
     {
         public Dictionary<GUIStyle, GUIContents> listWrapper = new Dictionary<GUIStyle, GUIContents>();
 
@@ -37,7 +35,7 @@ namespace z3nth10n.EditorUtils
         }
     }
 
-    public class GUIContents
+    public sealed class GUIContents
     {
         private static Dictionary<string, GUIContents> dictionary = new Dictionary<string, GUIContents>();
 
@@ -65,7 +63,7 @@ namespace z3nth10n.EditorUtils
     }
 
     // I suggest you not to implement anything here due to generation. Use partial approach.
-    public partial class xEditorGUI
+    public sealed partial class xEditorGUI
     {
         private Dictionary<string, StyleWrapper> stylesDict = new Dictionary<string, StyleWrapper>();
 
@@ -94,6 +92,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DropShadowLabel"))
                 stylesDict.Add("DropShadowLabel", new StyleWrapper(new GUIStyle("dropShadowLabel"), text));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("dropShadowLabel"), text);
 
             EditorGUI.DropShadowLabel(position, text);
@@ -104,6 +103,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DropShadowLabel"))
                 stylesDict.Add("DropShadowLabel", new StyleWrapper(new GUIStyle("dropShadowLabel"), content));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("dropShadowLabel"), content);
 
             EditorGUI.DropShadowLabel(position, content);
@@ -114,6 +114,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DropShadowLabel"))
                 stylesDict.Add("DropShadowLabel", new StyleWrapper(style, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, text);
 
             EditorGUI.DropShadowLabel(position, text, style);
@@ -124,6 +125,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DropShadowLabel"))
                 stylesDict.Add("DropShadowLabel", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
             EditorGUI.DropShadowLabel(position, content, style);
@@ -134,6 +136,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(EditorStyles.toggle, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.toggle, GUIContent.none);
 
             return EditorGUI.Toggle(position, value);
@@ -144,6 +147,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(EditorStyles.toggle, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.toggle, label);
 
             return EditorGUI.Toggle(position, label, value);
@@ -154,6 +158,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.Toggle(position, value, style);
@@ -164,6 +169,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.Toggle(position, label, value, style);
@@ -174,6 +180,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(EditorStyles.toggle, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.toggle, label);
 
             return EditorGUI.Toggle(position, label, value);
@@ -184,6 +191,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.Toggle(position, label, value, style);
@@ -194,6 +202,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoPasswordField"))
                 stylesDict.Add("DoPasswordField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.DoPasswordField(id, position, password, style);
@@ -204,6 +213,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoPasswordField"))
                 stylesDict.Add("DoPasswordField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DoPasswordField(id, position, label, password, style);
@@ -214,6 +224,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), GUIContent.none);
 
             return EditorGUI.Slider(position, value, leftValue, rightValue);
@@ -224,6 +235,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), label);
 
             return EditorGUI.Slider(position, label, value, leftValue, rightValue);
@@ -234,6 +246,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), label);
 
             return EditorGUI.Slider(position, label, value, leftValue, rightValue);
@@ -244,6 +257,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), GUIContent.none);
 
             EditorGUI.Slider(position, property, leftValue, rightValue);
@@ -254,6 +268,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), label);
 
             EditorGUI.Slider(position, property, leftValue, rightValue, label);
@@ -264,6 +279,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), label);
 
             EditorGUI.Slider(position, property, leftValue, rightValue, label);
@@ -274,6 +290,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), GUIContent.none);
 
             return EditorGUI.IntSlider(position, value, leftValue, rightValue);
@@ -284,6 +301,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), label);
 
             return EditorGUI.IntSlider(position, label, value, leftValue, rightValue);
@@ -294,6 +312,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), label);
 
             return EditorGUI.IntSlider(position, label, value, leftValue, rightValue);
@@ -304,6 +323,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), GUIContent.none);
 
             EditorGUI.IntSlider(position, property, leftValue, rightValue);
@@ -314,6 +334,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), label);
 
             EditorGUI.IntSlider(position, property, leftValue, rightValue, label);
@@ -324,6 +345,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), label);
 
             EditorGUI.IntSlider(position, property, leftValue, rightValue, label);
@@ -334,6 +356,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MinMaxSlider"))
                 stylesDict.Add("MinMaxSlider", new StyleWrapper(new GUIStyle("minMaxSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("minMaxSlider"), label);
 
             EditorGUI.MinMaxSlider(label, position, ref minValue, ref maxValue, minLimit, maxLimit);
@@ -344,6 +367,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MinMaxSlider"))
                 stylesDict.Add("MinMaxSlider", new StyleWrapper(new GUIStyle("minMaxSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("minMaxSlider"), label);
 
             EditorGUI.MinMaxSlider(position, label, ref minValue, ref maxValue, minLimit, maxLimit);
@@ -354,6 +378,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MinMaxSlider"))
                 stylesDict.Add("MinMaxSlider", new StyleWrapper(new GUIStyle("minMaxSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("minMaxSlider"), label);
 
             EditorGUI.MinMaxSlider(position, label, ref minValue, ref maxValue, minLimit, maxLimit);
@@ -364,6 +389,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MinMaxSlider"))
                 stylesDict.Add("MinMaxSlider", new StyleWrapper(new GUIStyle("minMaxSlider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("minMaxSlider"), GUIContent.none);
 
             EditorGUI.MinMaxSlider(position, ref minValue, ref maxValue, minLimit, maxLimit);
@@ -411,6 +437,7 @@ namespace z3nth10n.EditorUtils
 			if(!stylesDict.ContainsKey("EnumFlagsField"))
 				stylesDict.Add("EnumFlagsField", new StyleWrapper(style, label));
 
+			Rect lastPosition = _position;
 			UpdatePosition(style, label);
 
 			// This call has the following (1) unsupported params (an implementation is required): includeObsolete
@@ -423,6 +450,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, GUIContent.none);
 
             EditorGUI.ObjectField(position, property);
@@ -433,6 +461,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
             EditorGUI.ObjectField(position, property, label);
@@ -443,6 +472,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, GUIContent.none);
 
             EditorGUI.ObjectField(position, property, objType);
@@ -453,6 +483,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
             EditorGUI.ObjectField(position, property, objType, label);
@@ -463,6 +494,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, GUIContent.none);
 
             return EditorGUI.ObjectField(position, obj, objType, allowSceneObjects);
@@ -473,6 +505,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, GUIContent.none);
 
             return EditorGUI.ObjectField(position, obj, objType);
@@ -483,6 +516,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
             return EditorGUI.ObjectField(position, label, obj, objType, allowSceneObjects);
@@ -493,6 +527,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
             return EditorGUI.ObjectField(position, label, obj, objType);
@@ -503,6 +538,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
             return EditorGUI.ObjectField(position, label, obj, objType, allowSceneObjects);
@@ -513,6 +549,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
             return EditorGUI.ObjectField(position, label, obj, objType);
@@ -532,6 +569,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector2Field"))
                 stylesDict.Add("Vector2Field", new StyleWrapper(new GUIStyle("vector2Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector2Field"), label);
 
             return EditorGUI.Vector2Field(position, label, value);
@@ -542,6 +580,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector2Field"))
                 stylesDict.Add("Vector2Field", new StyleWrapper(new GUIStyle("vector2Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector2Field"), label);
 
             return EditorGUI.Vector2Field(position, label, value);
@@ -552,6 +591,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector3Field"))
                 stylesDict.Add("Vector3Field", new StyleWrapper(new GUIStyle("vector3Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector3Field"), label);
 
             return EditorGUI.Vector3Field(position, label, value);
@@ -562,6 +602,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector3Field"))
                 stylesDict.Add("Vector3Field", new StyleWrapper(new GUIStyle("vector3Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector3Field"), label);
 
             return EditorGUI.Vector3Field(position, label, value);
@@ -572,6 +613,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector4Field"))
                 stylesDict.Add("Vector4Field", new StyleWrapper(new GUIStyle("vector4Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector4Field"), label);
 
             return EditorGUI.Vector4Field(position, label, value);
@@ -582,6 +624,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector4Field"))
                 stylesDict.Add("Vector4Field", new StyleWrapper(new GUIStyle("vector4Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector4Field"), label);
 
             return EditorGUI.Vector4Field(position, label, value);
@@ -592,6 +635,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector2IntField"))
                 stylesDict.Add("Vector2IntField", new StyleWrapper(new GUIStyle("vector2IntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector2IntField"), label);
 
             return EditorGUI.Vector2IntField(position, label, value);
@@ -602,6 +646,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector2IntField"))
                 stylesDict.Add("Vector2IntField", new StyleWrapper(new GUIStyle("vector2IntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector2IntField"), label);
 
             return EditorGUI.Vector2IntField(position, label, value);
@@ -612,6 +657,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector3IntField"))
                 stylesDict.Add("Vector3IntField", new StyleWrapper(new GUIStyle("vector3IntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector3IntField"), label);
 
             return EditorGUI.Vector3IntField(position, label, value);
@@ -622,6 +668,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector3IntField"))
                 stylesDict.Add("Vector3IntField", new StyleWrapper(new GUIStyle("vector3IntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector3IntField"), label);
 
             return EditorGUI.Vector3IntField(position, label, value);
@@ -632,6 +679,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectField"))
                 stylesDict.Add("RectField", new StyleWrapper(new GUIStyle("rectField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectField"), GUIContent.none);
 
             return EditorGUI.RectField(position, value);
@@ -642,6 +690,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectField"))
                 stylesDict.Add("RectField", new StyleWrapper(new GUIStyle("rectField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectField"), label);
 
             return EditorGUI.RectField(position, label, value);
@@ -652,6 +701,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectField"))
                 stylesDict.Add("RectField", new StyleWrapper(new GUIStyle("rectField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectField"), label);
 
             return EditorGUI.RectField(position, label, value);
@@ -662,6 +712,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectIntField"))
                 stylesDict.Add("RectIntField", new StyleWrapper(new GUIStyle("rectIntField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectIntField"), GUIContent.none);
 
             return EditorGUI.RectIntField(position, value);
@@ -672,6 +723,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectIntField"))
                 stylesDict.Add("RectIntField", new StyleWrapper(new GUIStyle("rectIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectIntField"), label);
 
             return EditorGUI.RectIntField(position, label, value);
@@ -682,6 +734,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectIntField"))
                 stylesDict.Add("RectIntField", new StyleWrapper(new GUIStyle("rectIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectIntField"), label);
 
             return EditorGUI.RectIntField(position, label, value);
@@ -692,6 +745,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsField"))
                 stylesDict.Add("BoundsField", new StyleWrapper(new GUIStyle("boundsField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsField"), GUIContent.none);
 
             return EditorGUI.BoundsField(position, value);
@@ -702,6 +756,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsField"))
                 stylesDict.Add("BoundsField", new StyleWrapper(new GUIStyle("boundsField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsField"), label);
 
             return EditorGUI.BoundsField(position, label, value);
@@ -712,6 +767,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsField"))
                 stylesDict.Add("BoundsField", new StyleWrapper(new GUIStyle("boundsField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsField"), label);
 
             return EditorGUI.BoundsField(position, label, value);
@@ -722,6 +778,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsIntField"))
                 stylesDict.Add("BoundsIntField", new StyleWrapper(new GUIStyle("boundsIntField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsIntField"), GUIContent.none);
 
             return EditorGUI.BoundsIntField(position, value);
@@ -732,6 +789,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsIntField"))
                 stylesDict.Add("BoundsIntField", new StyleWrapper(new GUIStyle("boundsIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsIntField"), label);
 
             return EditorGUI.BoundsIntField(position, label, value);
@@ -742,6 +800,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsIntField"))
                 stylesDict.Add("BoundsIntField", new StyleWrapper(new GUIStyle("boundsIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsIntField"), label);
 
             return EditorGUI.BoundsIntField(position, label, value);
@@ -752,6 +811,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MultiFloatField"))
                 stylesDict.Add("MultiFloatField", new StyleWrapper(new GUIStyle("multiFloatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("multiFloatField"), label);
 
             EditorGUI.MultiFloatField(position, label, subLabels, values);
@@ -762,6 +822,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MultiFloatField"))
                 stylesDict.Add("MultiFloatField", new StyleWrapper(new GUIStyle("multiFloatField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("multiFloatField"), GUIContent.none);
 
             EditorGUI.MultiFloatField(position, subLabels, values);
@@ -772,6 +833,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MultiIntField"))
                 stylesDict.Add("MultiIntField", new StyleWrapper(new GUIStyle("multiIntField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("multiIntField"), GUIContent.none);
 
             EditorGUI.MultiIntField(position, subLabels, values);
@@ -782,6 +844,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MultiPropertyField"))
                 stylesDict.Add("MultiPropertyField", new StyleWrapper(new GUIStyle("multiPropertyField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("multiPropertyField"), label);
 
             EditorGUI.MultiPropertyField(position, subLabels, valuesIterator, label);
@@ -792,6 +855,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MultiPropertyField"))
                 stylesDict.Add("MultiPropertyField", new StyleWrapper(new GUIStyle("multiPropertyField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("multiPropertyField"), GUIContent.none);
 
             EditorGUI.MultiPropertyField(position, subLabels, valuesIterator);
@@ -802,6 +866,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ColorField"))
                 stylesDict.Add("ColorField", new StyleWrapper(EditorStyles.colorField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.colorField, GUIContent.none);
 
             return EditorGUI.ColorField(position, value);
@@ -812,6 +877,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ColorField"))
                 stylesDict.Add("ColorField", new StyleWrapper(EditorStyles.colorField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.colorField, label);
 
             return EditorGUI.ColorField(position, label, value);
@@ -822,6 +888,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ColorField"))
                 stylesDict.Add("ColorField", new StyleWrapper(EditorStyles.colorField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.colorField, label);
 
             return EditorGUI.ColorField(position, label, value);
@@ -832,6 +899,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ColorField"))
                 stylesDict.Add("ColorField", new StyleWrapper(EditorStyles.colorField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.colorField, label);
 
             return EditorGUI.ColorField(position, label, value, showEyedropper, showAlpha, hdr, hdrConfig);
@@ -842,6 +910,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ColorField"))
                 stylesDict.Add("ColorField", new StyleWrapper(EditorStyles.colorField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.colorField, label);
 
             return EditorGUI.ColorField(position, label, value, showEyedropper, showAlpha, hdr);
@@ -852,6 +921,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), GUIContent.none);
 
             return EditorGUI.CurveField(position, value);
@@ -862,6 +932,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
             return EditorGUI.CurveField(position, label, value);
@@ -872,6 +943,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
             return EditorGUI.CurveField(position, label, value);
@@ -882,6 +954,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), GUIContent.none);
 
             return EditorGUI.CurveField(position, value, color, ranges);
@@ -892,6 +965,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
             return EditorGUI.CurveField(position, label, value, color, ranges);
@@ -902,6 +976,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
             return EditorGUI.CurveField(position, label, value, color, ranges);
@@ -912,6 +987,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), GUIContent.none);
 
             EditorGUI.CurveField(position, property, color, ranges);
@@ -922,6 +998,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
             EditorGUI.CurveField(position, property, color, ranges, label);
@@ -952,6 +1029,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ProgressBar"))
                 stylesDict.Add("ProgressBar", new StyleWrapper(new GUIStyle("progressBar"), text));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("progressBar"), text);
 
             EditorGUI.ProgressBar(position, value, text);
@@ -962,6 +1040,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("HelpBox"))
                 stylesDict.Add("HelpBox", new StyleWrapper(EditorStyles.helpBox, message));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.helpBox, message);
 
             EditorGUI.HelpBox(position, message, type);
@@ -1031,6 +1110,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DropdownButton"))
                 stylesDict.Add("DropdownButton", new StyleWrapper(new GUIStyle("dropdownButton"), content));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("dropdownButton"), content);
 
             return EditorGUI.DropdownButton(position, content, focusType);
@@ -1041,6 +1121,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DropdownButton"))
                 stylesDict.Add("DropdownButton", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
             return EditorGUI.DropdownButton(position, content, focusType, style);
@@ -1051,6 +1132,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawTextureAlpha"))
                 stylesDict.Add("DrawTextureAlpha", new StyleWrapper(new GUIStyle("drawTextureAlpha"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawTextureAlpha"), GUIContent.none);
 
             EditorGUI.DrawTextureAlpha(position, image, scaleMode, imageAspect, mipLevel);
@@ -1061,6 +1143,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawTextureAlpha"))
                 stylesDict.Add("DrawTextureAlpha", new StyleWrapper(new GUIStyle("drawTextureAlpha"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawTextureAlpha"), GUIContent.none);
 
             EditorGUI.DrawTextureAlpha(position, image);
@@ -1071,6 +1154,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawTextureAlpha"))
                 stylesDict.Add("DrawTextureAlpha", new StyleWrapper(new GUIStyle("drawTextureAlpha"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawTextureAlpha"), GUIContent.none);
 
             EditorGUI.DrawTextureAlpha(position, image, scaleMode);
@@ -1081,6 +1165,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawTextureAlpha"))
                 stylesDict.Add("DrawTextureAlpha", new StyleWrapper(new GUIStyle("drawTextureAlpha"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawTextureAlpha"), GUIContent.none);
 
             EditorGUI.DrawTextureAlpha(position, image, scaleMode, imageAspect);
@@ -1091,6 +1176,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawTextureTransparent"))
                 stylesDict.Add("DrawTextureTransparent", new StyleWrapper(new GUIStyle("drawTextureTransparent"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawTextureTransparent"), GUIContent.none);
 
             // This call has the following (1) unsupported params (an implementation is required): colorWriteMask
@@ -1122,6 +1208,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawPreviewTexture"))
                 stylesDict.Add("DrawPreviewTexture", new StyleWrapper(new GUIStyle("drawPreviewTexture"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawPreviewTexture"), GUIContent.none);
 
             EditorGUI.DrawPreviewTexture(position, image, mat, scaleMode, imageAspect, mipLevel);
@@ -1132,6 +1219,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawPreviewTexture"))
                 stylesDict.Add("DrawPreviewTexture", new StyleWrapper(new GUIStyle("drawPreviewTexture"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawPreviewTexture"), GUIContent.none);
 
             EditorGUI.DrawPreviewTexture(position, image, mat, scaleMode, imageAspect);
@@ -1142,6 +1230,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawPreviewTexture"))
                 stylesDict.Add("DrawPreviewTexture", new StyleWrapper(new GUIStyle("drawPreviewTexture"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawPreviewTexture"), GUIContent.none);
 
             EditorGUI.DrawPreviewTexture(position, image, mat, scaleMode);
@@ -1152,6 +1241,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawPreviewTexture"))
                 stylesDict.Add("DrawPreviewTexture", new StyleWrapper(new GUIStyle("drawPreviewTexture"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawPreviewTexture"), GUIContent.none);
 
             EditorGUI.DrawPreviewTexture(position, image, mat);
@@ -1162,6 +1252,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DrawPreviewTexture"))
                 stylesDict.Add("DrawPreviewTexture", new StyleWrapper(new GUIStyle("drawPreviewTexture"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("drawPreviewTexture"), GUIContent.none);
 
             EditorGUI.DrawPreviewTexture(position, image);
@@ -1172,6 +1263,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(new GUIStyle("labelField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("labelField"), label);
 
             EditorGUI.LabelField(position, label);
@@ -1182,6 +1274,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             EditorGUI.LabelField(position, label, style);
@@ -1192,6 +1285,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(new GUIStyle("labelField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("labelField"), label);
 
             EditorGUI.LabelField(position, label);
@@ -1202,6 +1296,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             EditorGUI.LabelField(position, label, style);
@@ -1212,6 +1307,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(new GUIStyle("labelField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("labelField"), label);
 
             EditorGUI.LabelField(position, label, label2);
@@ -1222,6 +1318,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             EditorGUI.LabelField(position, label, label2, style);
@@ -1232,6 +1329,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(new GUIStyle("labelField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("labelField"), label);
 
             EditorGUI.LabelField(position, label, label2);
@@ -1242,6 +1340,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             EditorGUI.LabelField(position, label, label2, style);
@@ -1252,6 +1351,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ToggleLeft"))
                 stylesDict.Add("ToggleLeft", new StyleWrapper(new GUIStyle("toggleLeft"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("toggleLeft"), label);
 
             return EditorGUI.ToggleLeft(position, label, value);
@@ -1262,6 +1362,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ToggleLeft"))
                 stylesDict.Add("ToggleLeft", new StyleWrapper(new GUIStyle("toggleLeft"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("toggleLeft"), label);
 
             return EditorGUI.ToggleLeft(position, label, value, labelStyle);
@@ -1272,6 +1373,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ToggleLeft"))
                 stylesDict.Add("ToggleLeft", new StyleWrapper(new GUIStyle("toggleLeft"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("toggleLeft"), label);
 
             return EditorGUI.ToggleLeft(position, label, value);
@@ -1282,6 +1384,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ToggleLeft"))
                 stylesDict.Add("ToggleLeft", new StyleWrapper(new GUIStyle("toggleLeft"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("toggleLeft"), label);
 
             return EditorGUI.ToggleLeft(position, label, value, labelStyle);
@@ -1292,6 +1395,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(EditorStyles.textField, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.textField, text);
 
             return EditorGUI.TextField(position, text);
@@ -1302,6 +1406,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(style, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, text);
 
             return EditorGUI.TextField(position, text, style);
@@ -1312,6 +1417,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(EditorStyles.textField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.textField, label);
 
             return EditorGUI.TextField(position, label, text);
@@ -1322,6 +1428,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.TextField(position, label, text, style);
@@ -1332,6 +1439,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(EditorStyles.textField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.textField, label);
 
             return EditorGUI.TextField(position, label, text);
@@ -1342,6 +1450,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.TextField(position, label, text, style);
@@ -1352,6 +1461,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), text));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), text);
 
             return EditorGUI.DelayedTextField(position, text);
@@ -1362,6 +1472,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(style, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, text);
 
             return EditorGUI.DelayedTextField(position, text, style);
@@ -1372,6 +1483,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), label);
 
             return EditorGUI.DelayedTextField(position, label, text);
@@ -1382,6 +1494,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DelayedTextField(position, label, text, style);
@@ -1392,6 +1505,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), label);
 
             return EditorGUI.DelayedTextField(position, label, text);
@@ -1402,6 +1516,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DelayedTextField(position, label, text, style);
@@ -1412,6 +1527,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), GUIContent.none);
 
             EditorGUI.DelayedTextField(position, property);
@@ -1422,6 +1538,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), label);
 
             EditorGUI.DelayedTextField(position, property, label);
@@ -1432,6 +1549,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), label);
 
             return EditorGUI.DelayedTextField(position, label, controlId, text);
@@ -1442,6 +1560,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DelayedTextField(position, label, controlId, text, style);
@@ -1452,6 +1571,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextArea"))
                 stylesDict.Add("TextArea", new StyleWrapper(EditorStyles.textArea, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.textArea, text);
 
             return EditorGUI.TextArea(position, text);
@@ -1462,6 +1582,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextArea"))
                 stylesDict.Add("TextArea", new StyleWrapper(style, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, text);
 
             return EditorGUI.TextArea(position, text, style);
@@ -1472,6 +1593,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("SelectableLabel"))
                 stylesDict.Add("SelectableLabel", new StyleWrapper(new GUIStyle("selectableLabel"), text));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("selectableLabel"), text);
 
             EditorGUI.SelectableLabel(position, text);
@@ -1482,6 +1604,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("SelectableLabel"))
                 stylesDict.Add("SelectableLabel", new StyleWrapper(style, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, text);
 
             EditorGUI.SelectableLabel(position, text, style);
@@ -1492,6 +1615,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(new GUIStyle("passwordField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("passwordField"), GUIContent.none);
 
             return EditorGUI.PasswordField(position, password);
@@ -1502,6 +1626,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.PasswordField(position, password, style);
@@ -1512,6 +1637,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(new GUIStyle("passwordField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("passwordField"), label);
 
             return EditorGUI.PasswordField(position, label, password);
@@ -1522,6 +1648,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.PasswordField(position, label, password, style);
@@ -1532,6 +1659,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(new GUIStyle("passwordField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("passwordField"), label);
 
             return EditorGUI.PasswordField(position, label, password);
@@ -1542,6 +1670,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.PasswordField(position, label, password, style);
@@ -1552,6 +1681,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(new GUIStyle("floatField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("floatField"), GUIContent.none);
 
             return EditorGUI.FloatField(position, value);
@@ -1562,6 +1692,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.FloatField(position, value, style);
@@ -1572,6 +1703,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(new GUIStyle("floatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("floatField"), label);
 
             return EditorGUI.FloatField(position, label, value);
@@ -1582,6 +1714,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.FloatField(position, label, value, style);
@@ -1592,6 +1725,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(new GUIStyle("floatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("floatField"), label);
 
             return EditorGUI.FloatField(position, label, value);
@@ -1602,6 +1736,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.FloatField(position, label, value, style);
@@ -1612,6 +1747,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), GUIContent.none);
 
             return EditorGUI.DelayedFloatField(position, value);
@@ -1622,6 +1758,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.DelayedFloatField(position, value, style);
@@ -1632,6 +1769,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), label);
 
             return EditorGUI.DelayedFloatField(position, label, value);
@@ -1642,6 +1780,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DelayedFloatField(position, label, value, style);
@@ -1652,6 +1791,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), label);
 
             return EditorGUI.DelayedFloatField(position, label, value);
@@ -1662,6 +1802,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DelayedFloatField(position, label, value, style);
@@ -1672,6 +1813,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), GUIContent.none);
 
             EditorGUI.DelayedFloatField(position, property);
@@ -1682,6 +1824,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), label);
 
             EditorGUI.DelayedFloatField(position, property, label);
@@ -1692,6 +1835,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(new GUIStyle("doubleField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("doubleField"), GUIContent.none);
 
             return EditorGUI.DoubleField(position, value);
@@ -1702,6 +1846,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.DoubleField(position, value, style);
@@ -1712,6 +1857,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(new GUIStyle("doubleField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("doubleField"), label);
 
             return EditorGUI.DoubleField(position, label, value);
@@ -1722,6 +1868,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DoubleField(position, label, value, style);
@@ -1732,6 +1879,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(new GUIStyle("doubleField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("doubleField"), label);
 
             return EditorGUI.DoubleField(position, label, value);
@@ -1742,6 +1890,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DoubleField(position, label, value, style);
@@ -1752,6 +1901,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(new GUIStyle("delayedDoubleField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedDoubleField"), GUIContent.none);
 
             return EditorGUI.DelayedDoubleField(position, value);
@@ -1762,6 +1912,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.DelayedDoubleField(position, value, style);
@@ -1772,6 +1923,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(new GUIStyle("delayedDoubleField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedDoubleField"), label);
 
             return EditorGUI.DelayedDoubleField(position, label, value);
@@ -1782,6 +1934,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DelayedDoubleField(position, label, value, style);
@@ -1792,6 +1945,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(new GUIStyle("delayedDoubleField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedDoubleField"), label);
 
             return EditorGUI.DelayedDoubleField(position, label, value);
@@ -1802,6 +1956,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DelayedDoubleField(position, label, value, style);
@@ -1812,6 +1967,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(new GUIStyle("intField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intField"), GUIContent.none);
 
             return EditorGUI.IntField(position, value);
@@ -1822,6 +1978,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.IntField(position, value, style);
@@ -1832,6 +1989,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(new GUIStyle("intField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intField"), label);
 
             return EditorGUI.IntField(position, label, value);
@@ -1842,6 +2000,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.IntField(position, label, value, style);
@@ -1852,6 +2011,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(new GUIStyle("intField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intField"), label);
 
             return EditorGUI.IntField(position, label, value);
@@ -1862,6 +2022,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.IntField(position, label, value, style);
@@ -1872,6 +2033,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), GUIContent.none);
 
             return EditorGUI.DelayedIntField(position, value);
@@ -1882,6 +2044,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.DelayedIntField(position, value, style);
@@ -1892,6 +2055,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), label);
 
             return EditorGUI.DelayedIntField(position, label, value);
@@ -1902,6 +2066,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DelayedIntField(position, label, value, style);
@@ -1912,6 +2077,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), label);
 
             return EditorGUI.DelayedIntField(position, label, value);
@@ -1922,6 +2088,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.DelayedIntField(position, label, value, style);
@@ -1932,6 +2099,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), GUIContent.none);
 
             EditorGUI.DelayedIntField(position, property);
@@ -1942,6 +2110,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), label);
 
             EditorGUI.DelayedIntField(position, property, label);
@@ -1952,6 +2121,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(new GUIStyle("longField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("longField"), GUIContent.none);
 
             return EditorGUI.LongField(position, value);
@@ -1962,6 +2132,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.LongField(position, value, style);
@@ -1972,6 +2143,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(new GUIStyle("longField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("longField"), label);
 
             return EditorGUI.LongField(position, label, value);
@@ -1982,6 +2154,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.LongField(position, label, value, style);
@@ -1992,6 +2165,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(new GUIStyle("longField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("longField"), label);
 
             return EditorGUI.LongField(position, label, value);
@@ -2002,6 +2176,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.LongField(position, label, value, style);
@@ -2012,6 +2187,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(EditorStyles.popup, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.popup, GUIContent.none);
 
             return EditorGUI.Popup(position, selectedIndex, displayedOptions);
@@ -2022,6 +2198,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.Popup(position, selectedIndex, displayedOptions, style);
@@ -2032,9 +2209,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(EditorStyles.popup, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.popup, GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -2043,9 +2221,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -2054,6 +2233,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(EditorStyles.popup, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.popup, label);
 
             return EditorGUI.Popup(position, label, selectedIndex, displayedOptions);
@@ -2064,6 +2244,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.Popup(position, label, selectedIndex, displayedOptions, style);
@@ -2074,9 +2255,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(EditorStyles.popup, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.popup, label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -2085,9 +2267,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -2096,6 +2279,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(new GUIStyle("enumPopup"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("enumPopup"), GUIContent.none);
 
             return EditorGUI.EnumPopup(position, selected);
@@ -2106,6 +2290,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.EnumPopup(position, selected, style);
@@ -2116,6 +2301,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(new GUIStyle("enumPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("enumPopup"), label);
 
             return EditorGUI.EnumPopup(position, label, selected);
@@ -2126,6 +2312,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.EnumPopup(position, label, selected, style);
@@ -2136,6 +2323,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(new GUIStyle("enumPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("enumPopup"), label);
 
             return EditorGUI.EnumPopup(position, label, selected);
@@ -2146,6 +2334,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.EnumPopup(position, label, selected, style);
@@ -2158,6 +2347,7 @@ namespace z3nth10n.EditorUtils
 			if(!stylesDict.ContainsKey("EnumPopup"))
 				stylesDict.Add("EnumPopup", new StyleWrapper(style, label));
 
+			Rect lastPosition = _position;
 			UpdatePosition(style, label);
 
 			// This call has the following (2) unsupported params (an implementation is required): includeObsolete, checkEnabled
@@ -2170,6 +2360,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), GUIContent.none);
 
             return EditorGUI.IntPopup(position, selectedValue, displayedOptions, optionValues);
@@ -2180,6 +2371,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.IntPopup(position, selectedValue, displayedOptions, optionValues, style);
@@ -2190,9 +2382,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -2201,9 +2394,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -2212,9 +2406,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -2223,9 +2418,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -2234,9 +2430,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
         }
 
         public void IntPopup(Rect position, SerializedProperty property, GUIContent[] displayedOptions, int[] optionValues, [DefaultValue("null")] GUIContent label)
@@ -2244,9 +2441,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
         }
 
         public int IntPopup(Rect position, string label, int selectedValue, string[] displayedOptions, int[] optionValues)
@@ -2254,6 +2452,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), label);
 
             return EditorGUI.IntPopup(position, label, selectedValue, displayedOptions, optionValues);
@@ -2264,6 +2463,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.IntPopup(position, label, selectedValue, displayedOptions, optionValues, style);
@@ -2274,6 +2474,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(new GUIStyle("tagField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("tagField"), GUIContent.none);
 
             return EditorGUI.TagField(position, tag);
@@ -2284,6 +2485,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.TagField(position, tag, style);
@@ -2294,6 +2496,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(new GUIStyle("tagField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("tagField"), label);
 
             return EditorGUI.TagField(position, label, tag);
@@ -2304,6 +2507,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.TagField(position, label, tag, style);
@@ -2314,6 +2518,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(new GUIStyle("tagField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("tagField"), label);
 
             return EditorGUI.TagField(position, label, tag);
@@ -2324,6 +2529,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.TagField(position, label, tag, style);
@@ -2334,6 +2540,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(new GUIStyle("layerField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("layerField"), GUIContent.none);
 
             return EditorGUI.LayerField(position, layer);
@@ -2344,6 +2551,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.LayerField(position, layer, style);
@@ -2354,6 +2562,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(new GUIStyle("layerField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("layerField"), label);
 
             return EditorGUI.LayerField(position, label, layer);
@@ -2364,6 +2573,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.LayerField(position, label, layer, style);
@@ -2374,6 +2584,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(new GUIStyle("layerField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("layerField"), label);
 
             return EditorGUI.LayerField(position, label, layer);
@@ -2384,6 +2595,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.LayerField(position, label, layer, style);
@@ -2394,6 +2606,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(new GUIStyle("maskField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("maskField"), label);
 
             return EditorGUI.MaskField(position, label, mask, displayedOptions);
@@ -2404,6 +2617,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.MaskField(position, label, mask, displayedOptions, style);
@@ -2414,6 +2628,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(new GUIStyle("maskField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("maskField"), label);
 
             return EditorGUI.MaskField(position, label, mask, displayedOptions);
@@ -2424,6 +2639,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             return EditorGUI.MaskField(position, label, mask, displayedOptions, style);
@@ -2434,6 +2650,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(new GUIStyle("maskField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("maskField"), GUIContent.none);
 
             return EditorGUI.MaskField(position, mask, displayedOptions);
@@ -2444,6 +2661,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
             return EditorGUI.MaskField(position, mask, displayedOptions, style);
@@ -2454,6 +2672,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(EditorStyles.foldout, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.foldout, content);
 
             return EditorGUI.Foldout(position, foldout, content);
@@ -2464,6 +2683,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
             return EditorGUI.Foldout(position, foldout, content, style);
@@ -2474,6 +2694,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(EditorStyles.foldout, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.foldout, content);
 
             return EditorGUI.Foldout(position, foldout, content, toggleOnLabelClick);
@@ -2484,6 +2705,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
             return EditorGUI.Foldout(position, foldout, content, toggleOnLabelClick, style);
@@ -2494,6 +2716,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(EditorStyles.foldout, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.foldout, content);
 
             return EditorGUI.Foldout(position, foldout, content);
@@ -2504,6 +2727,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
             return EditorGUI.Foldout(position, foldout, content, style);
@@ -2514,6 +2738,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(EditorStyles.foldout, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.foldout, content);
 
             return EditorGUI.Foldout(position, foldout, content, toggleOnLabelClick);
@@ -2524,6 +2749,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
             return EditorGUI.Foldout(position, foldout, content, toggleOnLabelClick, style);
@@ -2545,10 +2771,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("HandlePrefixLabel"))
                 stylesDict.Add("HandlePrefixLabel", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             // This call has the following (1) unsupported params (an implementation is required): labelPosition
-            EditorGUI.HandlePrefixLabel(_position, totalPosition, label, id, style);
+            EditorGUI.HandlePrefixLabel(lastPosition, totalPosition, label, id, style);
         }
 
         public float GetPropertyHeight(SerializedProperty property, bool includeChildren)
@@ -2592,6 +2819,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PropertyField"))
                 stylesDict.Add("PropertyField", new StyleWrapper(new GUIStyle("propertyField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("propertyField"), GUIContent.none);
 
             return EditorGUI.PropertyField(position, property);
@@ -2602,6 +2830,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PropertyField"))
                 stylesDict.Add("PropertyField", new StyleWrapper(new GUIStyle("propertyField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("propertyField"), GUIContent.none);
 
             return EditorGUI.PropertyField(position, property, includeChildren);
@@ -2612,6 +2841,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PropertyField"))
                 stylesDict.Add("PropertyField", new StyleWrapper(new GUIStyle("propertyField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("propertyField"), label);
 
             return EditorGUI.PropertyField(position, property, label);
@@ -2622,6 +2852,7 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PropertyField"))
                 stylesDict.Add("PropertyField", new StyleWrapper(new GUIStyle("propertyField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("propertyField"), label);
 
             return EditorGUI.PropertyField(position, property, label, includeChildren);
@@ -2633,9 +2864,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(EditorStyles.foldout, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.foldout, content);
 
-            return EditorGUI.Foldout(_position, foldout, content);
+            return EditorGUI.Foldout(lastPosition, foldout, content);
         }
 
         public bool Foldout(bool foldout, string content, [DefaultValue("EditorStyles.foldout")] GUIStyle style)
@@ -2644,9 +2876,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
-            return EditorGUI.Foldout(_position, foldout, content, style);
+            return EditorGUI.Foldout(lastPosition, foldout, content, style);
         }
 
         public bool Foldout(bool foldout, GUIContent content)
@@ -2655,9 +2888,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(EditorStyles.foldout, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.foldout, content);
 
-            return EditorGUI.Foldout(_position, foldout, content);
+            return EditorGUI.Foldout(lastPosition, foldout, content);
         }
 
         public bool Foldout(bool foldout, GUIContent content, [DefaultValue("EditorStyles.foldout")] GUIStyle style)
@@ -2666,9 +2900,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
-            return EditorGUI.Foldout(_position, foldout, content, style);
+            return EditorGUI.Foldout(lastPosition, foldout, content, style);
         }
 
         public bool Foldout(bool foldout, string content, bool toggleOnLabelClick)
@@ -2677,9 +2912,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(EditorStyles.foldout, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.foldout, content);
 
-            return EditorGUI.Foldout(_position, foldout, content, toggleOnLabelClick);
+            return EditorGUI.Foldout(lastPosition, foldout, content, toggleOnLabelClick);
         }
 
         public bool Foldout(bool foldout, string content, bool toggleOnLabelClick, [DefaultValue("EditorStyles.foldout")] GUIStyle style)
@@ -2688,9 +2924,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
-            return EditorGUI.Foldout(_position, foldout, content, toggleOnLabelClick, style);
+            return EditorGUI.Foldout(lastPosition, foldout, content, toggleOnLabelClick, style);
         }
 
         public bool Foldout(bool foldout, GUIContent content, bool toggleOnLabelClick)
@@ -2699,9 +2936,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(EditorStyles.foldout, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.foldout, content);
 
-            return EditorGUI.Foldout(_position, foldout, content, toggleOnLabelClick);
+            return EditorGUI.Foldout(lastPosition, foldout, content, toggleOnLabelClick);
         }
 
         public bool Foldout(bool foldout, GUIContent content, bool toggleOnLabelClick, [DefaultValue("EditorStyles.foldout")] GUIStyle style)
@@ -2710,9 +2948,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Foldout"))
                 stylesDict.Add("Foldout", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
-            return EditorGUI.Foldout(_position, foldout, content, toggleOnLabelClick, style);
+            return EditorGUI.Foldout(lastPosition, foldout, content, toggleOnLabelClick, style);
         }
 
         public void PrefixLabel(string label)
@@ -2721,9 +2960,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PrefixLabel"))
                 stylesDict.Add("PrefixLabel", new StyleWrapper(new GUIStyle("prefixLabel"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("prefixLabel"), label);
 
-            EditorGUI.PrefixLabel(_position, (Converters)label);
+            EditorGUI.PrefixLabel(lastPosition, (Converters)label);
         }
 
         public void PrefixLabel(string label, [DefaultValue("\"Button\"")] GUIStyle followingStyle)
@@ -2732,10 +2972,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PrefixLabel"))
                 stylesDict.Add("PrefixLabel", new StyleWrapper(new GUIStyle("prefixLabel"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("prefixLabel"), label);
 
             // This call has the following (1) unsupported params (an implementation is required): followingStyle
-            EditorGUI.PrefixLabel(_position, (Converters)label);
+            EditorGUI.PrefixLabel(lastPosition, (Converters)label);
         }
 
         public void PrefixLabel(string label, GUIStyle followingStyle, GUIStyle labelStyle)
@@ -2744,10 +2985,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PrefixLabel"))
                 stylesDict.Add("PrefixLabel", new StyleWrapper(new GUIStyle("prefixLabel"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("prefixLabel"), label);
 
             // This call has the following (1) unsupported params (an implementation is required): followingStyle
-            EditorGUI.PrefixLabel(_position, (Converters)label, labelStyle);
+            EditorGUI.PrefixLabel(lastPosition, (Converters)label, labelStyle);
         }
 
         public void PrefixLabel(GUIContent label)
@@ -2756,9 +2998,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PrefixLabel"))
                 stylesDict.Add("PrefixLabel", new StyleWrapper(new GUIStyle("prefixLabel"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("prefixLabel"), label);
 
-            EditorGUI.PrefixLabel(_position, label);
+            EditorGUI.PrefixLabel(lastPosition, label);
         }
 
         public void PrefixLabel(GUIContent label, [DefaultValue("\"Button\"")] GUIStyle followingStyle)
@@ -2767,10 +3010,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PrefixLabel"))
                 stylesDict.Add("PrefixLabel", new StyleWrapper(new GUIStyle("prefixLabel"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("prefixLabel"), label);
 
             // This call has the following (1) unsupported params (an implementation is required): followingStyle
-            EditorGUI.PrefixLabel(_position, label);
+            EditorGUI.PrefixLabel(lastPosition, label);
         }
 
         public void PrefixLabel(GUIContent label, GUIStyle followingStyle, GUIStyle labelStyle)
@@ -2779,10 +3023,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PrefixLabel"))
                 stylesDict.Add("PrefixLabel", new StyleWrapper(new GUIStyle("prefixLabel"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("prefixLabel"), label);
 
             // This call has the following (1) unsupported params (an implementation is required): followingStyle
-            EditorGUI.PrefixLabel(_position, label, labelStyle);
+            EditorGUI.PrefixLabel(lastPosition, label, labelStyle);
         }
 
         public void LabelField(string label, params GUILayoutOption[] options)
@@ -2795,9 +3040,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(new GUIStyle("labelField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("labelField"), label);
 
-            EditorGUI.LabelField(_position, label);
+            EditorGUI.LabelField(lastPosition, label);
         }
 
         public void LabelField(string label, GUIStyle style, params GUILayoutOption[] options)
@@ -2810,9 +3056,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            EditorGUI.LabelField(_position, label, style);
+            EditorGUI.LabelField(lastPosition, label, style);
         }
 
         public void LabelField(GUIContent label, params GUILayoutOption[] options)
@@ -2825,9 +3072,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(new GUIStyle("labelField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("labelField"), label);
 
-            EditorGUI.LabelField(_position, label);
+            EditorGUI.LabelField(lastPosition, label);
         }
 
         public void LabelField(GUIContent label, GUIStyle style, params GUILayoutOption[] options)
@@ -2840,9 +3088,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            EditorGUI.LabelField(_position, label, style);
+            EditorGUI.LabelField(lastPosition, label, style);
         }
 
         public void LabelField(string label, string label2, params GUILayoutOption[] options)
@@ -2855,9 +3104,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(new GUIStyle("labelField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("labelField"), label);
 
-            EditorGUI.LabelField(_position, label, label2);
+            EditorGUI.LabelField(lastPosition, label, label2);
         }
 
         public void LabelField(string label, string label2, GUIStyle style, params GUILayoutOption[] options)
@@ -2870,9 +3120,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            EditorGUI.LabelField(_position, label, label2, style);
+            EditorGUI.LabelField(lastPosition, label, label2, style);
         }
 
         public void LabelField(GUIContent label, GUIContent label2, params GUILayoutOption[] options)
@@ -2885,9 +3136,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(new GUIStyle("labelField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("labelField"), label);
 
-            EditorGUI.LabelField(_position, label, label2);
+            EditorGUI.LabelField(lastPosition, label, label2);
         }
 
         public void LabelField(GUIContent label, GUIContent label2, GUIStyle style, params GUILayoutOption[] options)
@@ -2900,9 +3152,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LabelField"))
                 stylesDict.Add("LabelField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            EditorGUI.LabelField(_position, label, label2, style);
+            EditorGUI.LabelField(lastPosition, label, label2, style);
         }
 
         public bool Toggle(bool value, params GUILayoutOption[] options)
@@ -2915,9 +3168,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(EditorStyles.toggle, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.toggle, GUIContent.none);
 
-            return EditorGUI.Toggle(_position, value);
+            return EditorGUI.Toggle(lastPosition, value);
         }
 
         public bool Toggle(string label, bool value, params GUILayoutOption[] options)
@@ -2930,9 +3184,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(EditorStyles.toggle, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.toggle, label);
 
-            return EditorGUI.Toggle(_position, label, value);
+            return EditorGUI.Toggle(lastPosition, label, value);
         }
 
         public bool Toggle(GUIContent label, bool value, params GUILayoutOption[] options)
@@ -2945,9 +3200,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(EditorStyles.toggle, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.toggle, label);
 
-            return EditorGUI.Toggle(_position, label, value);
+            return EditorGUI.Toggle(lastPosition, label, value);
         }
 
         public bool Toggle(bool value, GUIStyle style, params GUILayoutOption[] options)
@@ -2960,9 +3216,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.Toggle(_position, value, style);
+            return EditorGUI.Toggle(lastPosition, value, style);
         }
 
         public bool Toggle(string label, bool value, GUIStyle style, params GUILayoutOption[] options)
@@ -2975,9 +3232,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.Toggle(_position, label, value, style);
+            return EditorGUI.Toggle(lastPosition, label, value, style);
         }
 
         public bool Toggle(GUIContent label, bool value, GUIStyle style, params GUILayoutOption[] options)
@@ -2990,9 +3248,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Toggle"))
                 stylesDict.Add("Toggle", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.Toggle(_position, label, value, style);
+            return EditorGUI.Toggle(lastPosition, label, value, style);
         }
 
         public bool ToggleLeft(string label, bool value, params GUILayoutOption[] options)
@@ -3005,9 +3264,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ToggleLeft"))
                 stylesDict.Add("ToggleLeft", new StyleWrapper(new GUIStyle("toggleLeft"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("toggleLeft"), label);
 
-            return EditorGUI.ToggleLeft(_position, label, value);
+            return EditorGUI.ToggleLeft(lastPosition, label, value);
         }
 
         public bool ToggleLeft(GUIContent label, bool value, params GUILayoutOption[] options)
@@ -3020,9 +3280,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ToggleLeft"))
                 stylesDict.Add("ToggleLeft", new StyleWrapper(new GUIStyle("toggleLeft"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("toggleLeft"), label);
 
-            return EditorGUI.ToggleLeft(_position, label, value);
+            return EditorGUI.ToggleLeft(lastPosition, label, value);
         }
 
         public bool ToggleLeft(string label, bool value, GUIStyle labelStyle, params GUILayoutOption[] options)
@@ -3035,9 +3296,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ToggleLeft"))
                 stylesDict.Add("ToggleLeft", new StyleWrapper(new GUIStyle("toggleLeft"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("toggleLeft"), label);
 
-            return EditorGUI.ToggleLeft(_position, label, value, labelStyle);
+            return EditorGUI.ToggleLeft(lastPosition, label, value, labelStyle);
         }
 
         public bool ToggleLeft(GUIContent label, bool value, GUIStyle labelStyle, params GUILayoutOption[] options)
@@ -3050,9 +3312,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ToggleLeft"))
                 stylesDict.Add("ToggleLeft", new StyleWrapper(new GUIStyle("toggleLeft"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("toggleLeft"), label);
 
-            return EditorGUI.ToggleLeft(_position, label, value, labelStyle);
+            return EditorGUI.ToggleLeft(lastPosition, label, value, labelStyle);
         }
 
         public string TextField(string text, params GUILayoutOption[] options)
@@ -3065,9 +3328,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(EditorStyles.textField, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.textField, text);
 
-            return EditorGUI.TextField(_position, text);
+            return EditorGUI.TextField(lastPosition, text);
         }
 
         public string TextField(string text, GUIStyle style, params GUILayoutOption[] options)
@@ -3080,9 +3344,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(style, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, text);
 
-            return EditorGUI.TextField(_position, text, style);
+            return EditorGUI.TextField(lastPosition, text, style);
         }
 
         public string TextField(string label, string text, params GUILayoutOption[] options)
@@ -3095,9 +3360,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(EditorStyles.textField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.textField, label);
 
-            return EditorGUI.TextField(_position, label, text);
+            return EditorGUI.TextField(lastPosition, label, text);
         }
 
         public string TextField(string label, string text, GUIStyle style, params GUILayoutOption[] options)
@@ -3110,9 +3376,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.TextField(_position, label, text, style);
+            return EditorGUI.TextField(lastPosition, label, text, style);
         }
 
         public string TextField(GUIContent label, string text, params GUILayoutOption[] options)
@@ -3125,9 +3392,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(EditorStyles.textField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.textField, label);
 
-            return EditorGUI.TextField(_position, label, text);
+            return EditorGUI.TextField(lastPosition, label, text);
         }
 
         public string TextField(GUIContent label, string text, GUIStyle style, params GUILayoutOption[] options)
@@ -3140,9 +3408,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextField"))
                 stylesDict.Add("TextField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.TextField(_position, label, text, style);
+            return EditorGUI.TextField(lastPosition, label, text, style);
         }
 
         public string DelayedTextField(string text, params GUILayoutOption[] options)
@@ -3155,9 +3424,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), text));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), text);
 
-            return EditorGUI.DelayedTextField(_position, text);
+            return EditorGUI.DelayedTextField(lastPosition, text);
         }
 
         public string DelayedTextField(string text, GUIStyle style, params GUILayoutOption[] options)
@@ -3170,9 +3440,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(style, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, text);
 
-            return EditorGUI.DelayedTextField(_position, text, style);
+            return EditorGUI.DelayedTextField(lastPosition, text, style);
         }
 
         public string DelayedTextField(string label, string text, params GUILayoutOption[] options)
@@ -3185,9 +3456,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), label);
 
-            return EditorGUI.DelayedTextField(_position, label, text);
+            return EditorGUI.DelayedTextField(lastPosition, label, text);
         }
 
         public string DelayedTextField(string label, string text, GUIStyle style, params GUILayoutOption[] options)
@@ -3200,9 +3472,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DelayedTextField(_position, label, text, style);
+            return EditorGUI.DelayedTextField(lastPosition, label, text, style);
         }
 
         public string DelayedTextField(GUIContent label, string text, params GUILayoutOption[] options)
@@ -3215,9 +3488,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), label);
 
-            return EditorGUI.DelayedTextField(_position, label, text);
+            return EditorGUI.DelayedTextField(lastPosition, label, text);
         }
 
         public string DelayedTextField(GUIContent label, string text, GUIStyle style, params GUILayoutOption[] options)
@@ -3230,9 +3504,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DelayedTextField(_position, label, text, style);
+            return EditorGUI.DelayedTextField(lastPosition, label, text, style);
         }
 
         public void DelayedTextField(SerializedProperty property, params GUILayoutOption[] options)
@@ -3245,9 +3520,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), GUIContent.none);
 
-            EditorGUI.DelayedTextField(_position, property);
+            EditorGUI.DelayedTextField(lastPosition, property);
         }
 
         public void DelayedTextField(SerializedProperty property, GUIContent label, params GUILayoutOption[] options)
@@ -3260,9 +3536,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedTextField"))
                 stylesDict.Add("DelayedTextField", new StyleWrapper(new GUIStyle("delayedTextField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedTextField"), label);
 
-            EditorGUI.DelayedTextField(_position, property, label);
+            EditorGUI.DelayedTextField(lastPosition, property, label);
         }
 
         public string TextArea(string text, params GUILayoutOption[] options)
@@ -3275,9 +3552,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextArea"))
                 stylesDict.Add("TextArea", new StyleWrapper(EditorStyles.textArea, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.textArea, text);
 
-            return EditorGUI.TextArea(_position, text);
+            return EditorGUI.TextArea(lastPosition, text);
         }
 
         public string TextArea(string text, GUIStyle style, params GUILayoutOption[] options)
@@ -3290,9 +3568,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TextArea"))
                 stylesDict.Add("TextArea", new StyleWrapper(style, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, text);
 
-            return EditorGUI.TextArea(_position, text, style);
+            return EditorGUI.TextArea(lastPosition, text, style);
         }
 
         public void SelectableLabel(string text, params GUILayoutOption[] options)
@@ -3305,9 +3584,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("SelectableLabel"))
                 stylesDict.Add("SelectableLabel", new StyleWrapper(new GUIStyle("selectableLabel"), text));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("selectableLabel"), text);
 
-            EditorGUI.SelectableLabel(_position, text);
+            EditorGUI.SelectableLabel(lastPosition, text);
         }
 
         public void SelectableLabel(string text, GUIStyle style, params GUILayoutOption[] options)
@@ -3320,9 +3600,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("SelectableLabel"))
                 stylesDict.Add("SelectableLabel", new StyleWrapper(style, text));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, text);
 
-            EditorGUI.SelectableLabel(_position, text, style);
+            EditorGUI.SelectableLabel(lastPosition, text, style);
         }
 
         public string PasswordField(string password, params GUILayoutOption[] options)
@@ -3335,9 +3616,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(new GUIStyle("passwordField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("passwordField"), GUIContent.none);
 
-            return EditorGUI.PasswordField(_position, password);
+            return EditorGUI.PasswordField(lastPosition, password);
         }
 
         public string PasswordField(string password, GUIStyle style, params GUILayoutOption[] options)
@@ -3350,9 +3632,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.PasswordField(_position, password, style);
+            return EditorGUI.PasswordField(lastPosition, password, style);
         }
 
         public string PasswordField(string label, string password, params GUILayoutOption[] options)
@@ -3365,9 +3648,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(new GUIStyle("passwordField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("passwordField"), label);
 
-            return EditorGUI.PasswordField(_position, label, password);
+            return EditorGUI.PasswordField(lastPosition, label, password);
         }
 
         public string PasswordField(string label, string password, GUIStyle style, params GUILayoutOption[] options)
@@ -3380,9 +3664,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.PasswordField(_position, label, password, style);
+            return EditorGUI.PasswordField(lastPosition, label, password, style);
         }
 
         public string PasswordField(GUIContent label, string password, params GUILayoutOption[] options)
@@ -3395,9 +3680,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(new GUIStyle("passwordField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("passwordField"), label);
 
-            return EditorGUI.PasswordField(_position, label, password);
+            return EditorGUI.PasswordField(lastPosition, label, password);
         }
 
         public string PasswordField(GUIContent label, string password, GUIStyle style, params GUILayoutOption[] options)
@@ -3410,9 +3696,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PasswordField"))
                 stylesDict.Add("PasswordField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.PasswordField(_position, label, password, style);
+            return EditorGUI.PasswordField(lastPosition, label, password, style);
         }
 
         public float FloatField(float value, params GUILayoutOption[] options)
@@ -3425,9 +3712,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(new GUIStyle("floatField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("floatField"), GUIContent.none);
 
-            return EditorGUI.FloatField(_position, value);
+            return EditorGUI.FloatField(lastPosition, value);
         }
 
         public float FloatField(float value, GUIStyle style, params GUILayoutOption[] options)
@@ -3440,9 +3728,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.FloatField(_position, value, style);
+            return EditorGUI.FloatField(lastPosition, value, style);
         }
 
         public float FloatField(string label, float value, params GUILayoutOption[] options)
@@ -3455,9 +3744,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(new GUIStyle("floatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("floatField"), label);
 
-            return EditorGUI.FloatField(_position, label, value);
+            return EditorGUI.FloatField(lastPosition, label, value);
         }
 
         public float FloatField(string label, float value, GUIStyle style, params GUILayoutOption[] options)
@@ -3470,9 +3760,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.FloatField(_position, label, value, style);
+            return EditorGUI.FloatField(lastPosition, label, value, style);
         }
 
         public float FloatField(GUIContent label, float value, params GUILayoutOption[] options)
@@ -3485,9 +3776,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(new GUIStyle("floatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("floatField"), label);
 
-            return EditorGUI.FloatField(_position, label, value);
+            return EditorGUI.FloatField(lastPosition, label, value);
         }
 
         public float FloatField(GUIContent label, float value, GUIStyle style, params GUILayoutOption[] options)
@@ -3500,9 +3792,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("FloatField"))
                 stylesDict.Add("FloatField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.FloatField(_position, label, value, style);
+            return EditorGUI.FloatField(lastPosition, label, value, style);
         }
 
         public float DelayedFloatField(float value, params GUILayoutOption[] options)
@@ -3515,9 +3808,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), GUIContent.none);
 
-            return EditorGUI.DelayedFloatField(_position, value);
+            return EditorGUI.DelayedFloatField(lastPosition, value);
         }
 
         public float DelayedFloatField(float value, GUIStyle style, params GUILayoutOption[] options)
@@ -3530,9 +3824,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.DelayedFloatField(_position, value, style);
+            return EditorGUI.DelayedFloatField(lastPosition, value, style);
         }
 
         public float DelayedFloatField(string label, float value, params GUILayoutOption[] options)
@@ -3545,9 +3840,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), label);
 
-            return EditorGUI.DelayedFloatField(_position, label, value);
+            return EditorGUI.DelayedFloatField(lastPosition, label, value);
         }
 
         public float DelayedFloatField(string label, float value, GUIStyle style, params GUILayoutOption[] options)
@@ -3560,9 +3856,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DelayedFloatField(_position, label, value, style);
+            return EditorGUI.DelayedFloatField(lastPosition, label, value, style);
         }
 
         public float DelayedFloatField(GUIContent label, float value, params GUILayoutOption[] options)
@@ -3575,9 +3872,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), label);
 
-            return EditorGUI.DelayedFloatField(_position, label, value);
+            return EditorGUI.DelayedFloatField(lastPosition, label, value);
         }
 
         public float DelayedFloatField(GUIContent label, float value, GUIStyle style, params GUILayoutOption[] options)
@@ -3590,9 +3888,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DelayedFloatField(_position, label, value, style);
+            return EditorGUI.DelayedFloatField(lastPosition, label, value, style);
         }
 
         public void DelayedFloatField(SerializedProperty property, params GUILayoutOption[] options)
@@ -3605,9 +3904,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), GUIContent.none);
 
-            EditorGUI.DelayedFloatField(_position, property);
+            EditorGUI.DelayedFloatField(lastPosition, property);
         }
 
         public void DelayedFloatField(SerializedProperty property, GUIContent label, params GUILayoutOption[] options)
@@ -3620,9 +3920,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedFloatField"))
                 stylesDict.Add("DelayedFloatField", new StyleWrapper(new GUIStyle("delayedFloatField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedFloatField"), label);
 
-            EditorGUI.DelayedFloatField(_position, property, label);
+            EditorGUI.DelayedFloatField(lastPosition, property, label);
         }
 
         public double DoubleField(double value, params GUILayoutOption[] options)
@@ -3635,9 +3936,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(new GUIStyle("doubleField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("doubleField"), GUIContent.none);
 
-            return EditorGUI.DoubleField(_position, value);
+            return EditorGUI.DoubleField(lastPosition, value);
         }
 
         public double DoubleField(double value, GUIStyle style, params GUILayoutOption[] options)
@@ -3650,9 +3952,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.DoubleField(_position, value, style);
+            return EditorGUI.DoubleField(lastPosition, value, style);
         }
 
         public double DoubleField(string label, double value, params GUILayoutOption[] options)
@@ -3665,9 +3968,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(new GUIStyle("doubleField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("doubleField"), label);
 
-            return EditorGUI.DoubleField(_position, label, value);
+            return EditorGUI.DoubleField(lastPosition, label, value);
         }
 
         public double DoubleField(string label, double value, GUIStyle style, params GUILayoutOption[] options)
@@ -3680,9 +3984,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DoubleField(_position, label, value, style);
+            return EditorGUI.DoubleField(lastPosition, label, value, style);
         }
 
         public double DoubleField(GUIContent label, double value, params GUILayoutOption[] options)
@@ -3695,9 +4000,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(new GUIStyle("doubleField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("doubleField"), label);
 
-            return EditorGUI.DoubleField(_position, label, value);
+            return EditorGUI.DoubleField(lastPosition, label, value);
         }
 
         public double DoubleField(GUIContent label, double value, GUIStyle style, params GUILayoutOption[] options)
@@ -3710,9 +4016,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DoubleField"))
                 stylesDict.Add("DoubleField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DoubleField(_position, label, value, style);
+            return EditorGUI.DoubleField(lastPosition, label, value, style);
         }
 
         public double DelayedDoubleField(double value, params GUILayoutOption[] options)
@@ -3725,9 +4032,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(new GUIStyle("delayedDoubleField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedDoubleField"), GUIContent.none);
 
-            return EditorGUI.DelayedDoubleField(_position, value);
+            return EditorGUI.DelayedDoubleField(lastPosition, value);
         }
 
         public double DelayedDoubleField(double value, GUIStyle style, params GUILayoutOption[] options)
@@ -3740,9 +4048,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.DelayedDoubleField(_position, value, style);
+            return EditorGUI.DelayedDoubleField(lastPosition, value, style);
         }
 
         public double DelayedDoubleField(string label, double value, params GUILayoutOption[] options)
@@ -3755,9 +4064,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(new GUIStyle("delayedDoubleField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedDoubleField"), label);
 
-            return EditorGUI.DelayedDoubleField(_position, label, value);
+            return EditorGUI.DelayedDoubleField(lastPosition, label, value);
         }
 
         public double DelayedDoubleField(string label, double value, GUIStyle style, params GUILayoutOption[] options)
@@ -3770,9 +4080,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DelayedDoubleField(_position, label, value, style);
+            return EditorGUI.DelayedDoubleField(lastPosition, label, value, style);
         }
 
         public double DelayedDoubleField(GUIContent label, double value, params GUILayoutOption[] options)
@@ -3785,9 +4096,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(new GUIStyle("delayedDoubleField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedDoubleField"), label);
 
-            return EditorGUI.DelayedDoubleField(_position, label, value);
+            return EditorGUI.DelayedDoubleField(lastPosition, label, value);
         }
 
         public double DelayedDoubleField(GUIContent label, double value, GUIStyle style, params GUILayoutOption[] options)
@@ -3800,9 +4112,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedDoubleField"))
                 stylesDict.Add("DelayedDoubleField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DelayedDoubleField(_position, label, value, style);
+            return EditorGUI.DelayedDoubleField(lastPosition, label, value, style);
         }
 
         public int IntField(int value, params GUILayoutOption[] options)
@@ -3815,9 +4128,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(new GUIStyle("intField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intField"), GUIContent.none);
 
-            return EditorGUI.IntField(_position, value);
+            return EditorGUI.IntField(lastPosition, value);
         }
 
         public int IntField(int value, GUIStyle style, params GUILayoutOption[] options)
@@ -3830,9 +4144,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.IntField(_position, value, style);
+            return EditorGUI.IntField(lastPosition, value, style);
         }
 
         public int IntField(string label, int value, params GUILayoutOption[] options)
@@ -3845,9 +4160,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(new GUIStyle("intField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intField"), label);
 
-            return EditorGUI.IntField(_position, label, value);
+            return EditorGUI.IntField(lastPosition, label, value);
         }
 
         public int IntField(string label, int value, GUIStyle style, params GUILayoutOption[] options)
@@ -3860,9 +4176,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.IntField(_position, label, value, style);
+            return EditorGUI.IntField(lastPosition, label, value, style);
         }
 
         public int IntField(GUIContent label, int value, params GUILayoutOption[] options)
@@ -3875,9 +4192,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(new GUIStyle("intField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intField"), label);
 
-            return EditorGUI.IntField(_position, label, value);
+            return EditorGUI.IntField(lastPosition, label, value);
         }
 
         public int IntField(GUIContent label, int value, GUIStyle style, params GUILayoutOption[] options)
@@ -3890,9 +4208,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntField"))
                 stylesDict.Add("IntField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.IntField(_position, label, value, style);
+            return EditorGUI.IntField(lastPosition, label, value, style);
         }
 
         public int DelayedIntField(int value, params GUILayoutOption[] options)
@@ -3905,9 +4224,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), GUIContent.none);
 
-            return EditorGUI.DelayedIntField(_position, value);
+            return EditorGUI.DelayedIntField(lastPosition, value);
         }
 
         public int DelayedIntField(int value, GUIStyle style, params GUILayoutOption[] options)
@@ -3920,9 +4240,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.DelayedIntField(_position, value, style);
+            return EditorGUI.DelayedIntField(lastPosition, value, style);
         }
 
         public int DelayedIntField(string label, int value, params GUILayoutOption[] options)
@@ -3935,9 +4256,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), label);
 
-            return EditorGUI.DelayedIntField(_position, label, value);
+            return EditorGUI.DelayedIntField(lastPosition, label, value);
         }
 
         public int DelayedIntField(string label, int value, GUIStyle style, params GUILayoutOption[] options)
@@ -3950,9 +4272,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DelayedIntField(_position, label, value, style);
+            return EditorGUI.DelayedIntField(lastPosition, label, value, style);
         }
 
         public int DelayedIntField(GUIContent label, int value, params GUILayoutOption[] options)
@@ -3965,9 +4288,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), label);
 
-            return EditorGUI.DelayedIntField(_position, label, value);
+            return EditorGUI.DelayedIntField(lastPosition, label, value);
         }
 
         public int DelayedIntField(GUIContent label, int value, GUIStyle style, params GUILayoutOption[] options)
@@ -3980,9 +4304,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.DelayedIntField(_position, label, value, style);
+            return EditorGUI.DelayedIntField(lastPosition, label, value, style);
         }
 
         public void DelayedIntField(SerializedProperty property, params GUILayoutOption[] options)
@@ -3995,9 +4320,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), GUIContent.none);
 
-            EditorGUI.DelayedIntField(_position, property);
+            EditorGUI.DelayedIntField(lastPosition, property);
         }
 
         public void DelayedIntField(SerializedProperty property, GUIContent label, params GUILayoutOption[] options)
@@ -4010,9 +4336,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DelayedIntField"))
                 stylesDict.Add("DelayedIntField", new StyleWrapper(new GUIStyle("delayedIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("delayedIntField"), label);
 
-            EditorGUI.DelayedIntField(_position, property, label);
+            EditorGUI.DelayedIntField(lastPosition, property, label);
         }
 
         public long LongField(long value, params GUILayoutOption[] options)
@@ -4025,9 +4352,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(new GUIStyle("longField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("longField"), GUIContent.none);
 
-            return EditorGUI.LongField(_position, value);
+            return EditorGUI.LongField(lastPosition, value);
         }
 
         public long LongField(long value, GUIStyle style, params GUILayoutOption[] options)
@@ -4040,9 +4368,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.LongField(_position, value, style);
+            return EditorGUI.LongField(lastPosition, value, style);
         }
 
         public long LongField(string label, long value, params GUILayoutOption[] options)
@@ -4055,9 +4384,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(new GUIStyle("longField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("longField"), label);
 
-            return EditorGUI.LongField(_position, label, value);
+            return EditorGUI.LongField(lastPosition, label, value);
         }
 
         public long LongField(string label, long value, GUIStyle style, params GUILayoutOption[] options)
@@ -4070,9 +4400,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.LongField(_position, label, value, style);
+            return EditorGUI.LongField(lastPosition, label, value, style);
         }
 
         public long LongField(GUIContent label, long value, params GUILayoutOption[] options)
@@ -4085,9 +4416,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(new GUIStyle("longField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("longField"), label);
 
-            return EditorGUI.LongField(_position, label, value);
+            return EditorGUI.LongField(lastPosition, label, value);
         }
 
         public long LongField(GUIContent label, long value, GUIStyle style, params GUILayoutOption[] options)
@@ -4100,9 +4432,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LongField"))
                 stylesDict.Add("LongField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.LongField(_position, label, value, style);
+            return EditorGUI.LongField(lastPosition, label, value, style);
         }
 
         public float Slider(float value, float leftValue, float rightValue, params GUILayoutOption[] options)
@@ -4115,9 +4448,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), GUIContent.none);
 
-            return EditorGUI.Slider(_position, value, leftValue, rightValue);
+            return EditorGUI.Slider(lastPosition, value, leftValue, rightValue);
         }
 
         public float Slider(string label, float value, float leftValue, float rightValue, params GUILayoutOption[] options)
@@ -4130,9 +4464,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), label);
 
-            return EditorGUI.Slider(_position, label, value, leftValue, rightValue);
+            return EditorGUI.Slider(lastPosition, label, value, leftValue, rightValue);
         }
 
         public float Slider(GUIContent label, float value, float leftValue, float rightValue, params GUILayoutOption[] options)
@@ -4145,9 +4480,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), label);
 
-            return EditorGUI.Slider(_position, label, value, leftValue, rightValue);
+            return EditorGUI.Slider(lastPosition, label, value, leftValue, rightValue);
         }
 
         public void Slider(SerializedProperty property, float leftValue, float rightValue, params GUILayoutOption[] options)
@@ -4160,9 +4496,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), GUIContent.none);
 
-            EditorGUI.Slider(_position, property, leftValue, rightValue);
+            EditorGUI.Slider(lastPosition, property, leftValue, rightValue);
         }
 
         public void Slider(SerializedProperty property, float leftValue, float rightValue, string label, params GUILayoutOption[] options)
@@ -4175,9 +4512,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), label);
 
-            EditorGUI.Slider(_position, property, leftValue, rightValue, label);
+            EditorGUI.Slider(lastPosition, property, leftValue, rightValue, label);
         }
 
         public void Slider(SerializedProperty property, float leftValue, float rightValue, GUIContent label, params GUILayoutOption[] options)
@@ -4190,9 +4528,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Slider"))
                 stylesDict.Add("Slider", new StyleWrapper(new GUIStyle("slider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("slider"), label);
 
-            EditorGUI.Slider(_position, property, leftValue, rightValue, label);
+            EditorGUI.Slider(lastPosition, property, leftValue, rightValue, label);
         }
 
         public int IntSlider(int value, int leftValue, int rightValue, params GUILayoutOption[] options)
@@ -4205,9 +4544,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), GUIContent.none);
 
-            return EditorGUI.IntSlider(_position, value, leftValue, rightValue);
+            return EditorGUI.IntSlider(lastPosition, value, leftValue, rightValue);
         }
 
         public int IntSlider(string label, int value, int leftValue, int rightValue, params GUILayoutOption[] options)
@@ -4220,9 +4560,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), label);
 
-            return EditorGUI.IntSlider(_position, label, value, leftValue, rightValue);
+            return EditorGUI.IntSlider(lastPosition, label, value, leftValue, rightValue);
         }
 
         public int IntSlider(GUIContent label, int value, int leftValue, int rightValue, params GUILayoutOption[] options)
@@ -4235,9 +4576,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), label);
 
-            return EditorGUI.IntSlider(_position, label, value, leftValue, rightValue);
+            return EditorGUI.IntSlider(lastPosition, label, value, leftValue, rightValue);
         }
 
         public void IntSlider(SerializedProperty property, int leftValue, int rightValue, params GUILayoutOption[] options)
@@ -4250,9 +4592,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), GUIContent.none);
 
-            EditorGUI.IntSlider(_position, property, leftValue, rightValue);
+            EditorGUI.IntSlider(lastPosition, property, leftValue, rightValue);
         }
 
         public void IntSlider(SerializedProperty property, int leftValue, int rightValue, string label, params GUILayoutOption[] options)
@@ -4265,9 +4608,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), label);
 
-            EditorGUI.IntSlider(_position, property, leftValue, rightValue, label);
+            EditorGUI.IntSlider(lastPosition, property, leftValue, rightValue, label);
         }
 
         public void IntSlider(SerializedProperty property, int leftValue, int rightValue, GUIContent label, params GUILayoutOption[] options)
@@ -4280,9 +4624,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntSlider"))
                 stylesDict.Add("IntSlider", new StyleWrapper(new GUIStyle("intSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intSlider"), label);
 
-            EditorGUI.IntSlider(_position, property, leftValue, rightValue, label);
+            EditorGUI.IntSlider(lastPosition, property, leftValue, rightValue, label);
         }
 
         public void MinMaxSlider(ref float minValue, ref float maxValue, float minLimit, float maxLimit, params GUILayoutOption[] options)
@@ -4295,9 +4640,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MinMaxSlider"))
                 stylesDict.Add("MinMaxSlider", new StyleWrapper(new GUIStyle("minMaxSlider"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("minMaxSlider"), GUIContent.none);
 
-            EditorGUI.MinMaxSlider(_position, ref minValue, ref maxValue, minLimit, maxLimit);
+            EditorGUI.MinMaxSlider(lastPosition, ref minValue, ref maxValue, minLimit, maxLimit);
         }
 
         public void MinMaxSlider(string label, ref float minValue, ref float maxValue, float minLimit, float maxLimit, params GUILayoutOption[] options)
@@ -4310,9 +4656,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MinMaxSlider"))
                 stylesDict.Add("MinMaxSlider", new StyleWrapper(new GUIStyle("minMaxSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("minMaxSlider"), label);
 
-            EditorGUI.MinMaxSlider(_position, label, ref minValue, ref maxValue, minLimit, maxLimit);
+            EditorGUI.MinMaxSlider(lastPosition, label, ref minValue, ref maxValue, minLimit, maxLimit);
         }
 
         public void MinMaxSlider(GUIContent label, ref float minValue, ref float maxValue, float minLimit, float maxLimit, params GUILayoutOption[] options)
@@ -4325,9 +4672,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MinMaxSlider"))
                 stylesDict.Add("MinMaxSlider", new StyleWrapper(new GUIStyle("minMaxSlider"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("minMaxSlider"), label);
 
-            EditorGUI.MinMaxSlider(_position, label, ref minValue, ref maxValue, minLimit, maxLimit);
+            EditorGUI.MinMaxSlider(lastPosition, label, ref minValue, ref maxValue, minLimit, maxLimit);
         }
 
         public int Popup(int selectedIndex, string[] displayedOptions, params GUILayoutOption[] options)
@@ -4340,9 +4688,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(EditorStyles.popup, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.popup, GUIContent.none);
 
-            return EditorGUI.Popup(_position, selectedIndex, displayedOptions);
+            return EditorGUI.Popup(lastPosition, selectedIndex, displayedOptions);
         }
 
         public int Popup(int selectedIndex, string[] displayedOptions, GUIStyle style, params GUILayoutOption[] options)
@@ -4355,9 +4704,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.Popup(_position, selectedIndex, displayedOptions, style);
+            return EditorGUI.Popup(lastPosition, selectedIndex, displayedOptions, style);
         }
 
         public int Popup(int selectedIndex, GUIContent[] displayedOptions, params GUILayoutOption[] options)
@@ -4370,9 +4720,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(EditorStyles.popup, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.popup, GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -4386,9 +4737,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -4402,9 +4754,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(EditorStyles.popup, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.popup, label);
 
-            return EditorGUI.Popup(_position, label, selectedIndex, displayedOptions);
+            return EditorGUI.Popup(lastPosition, label, selectedIndex, displayedOptions);
         }
 
         public int Popup(GUIContent label, int selectedIndex, string[] displayedOptions, params GUILayoutOption[] options)
@@ -4417,9 +4770,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(EditorStyles.popup, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.popup, label);
 
-            return EditorGUI.Popup(_position, label, selectedIndex, displayedOptions.Select(x => new GUIContent(x)).ToArray());
+            return EditorGUI.Popup(lastPosition, label, selectedIndex, displayedOptions.Select(x => new GUIContent(x)).ToArray());
         }
 
         public int Popup(string label, int selectedIndex, string[] displayedOptions, GUIStyle style, params GUILayoutOption[] options)
@@ -4432,9 +4786,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.Popup(_position, label, selectedIndex, displayedOptions, style);
+            return EditorGUI.Popup(lastPosition, label, selectedIndex, displayedOptions, style);
         }
 
         public int Popup(GUIContent label, int selectedIndex, GUIContent[] displayedOptions, params GUILayoutOption[] options)
@@ -4447,9 +4802,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(EditorStyles.popup, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.popup, label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -4463,9 +4819,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Popup"))
                 stylesDict.Add("Popup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -4479,9 +4836,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(new GUIStyle("enumPopup"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("enumPopup"), GUIContent.none);
 
-            return EditorGUI.EnumPopup(_position, selected);
+            return EditorGUI.EnumPopup(lastPosition, selected);
         }
 
         public Enum EnumPopup(Enum selected, GUIStyle style, params GUILayoutOption[] options)
@@ -4494,9 +4852,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.EnumPopup(_position, selected, style);
+            return EditorGUI.EnumPopup(lastPosition, selected, style);
         }
 
         public Enum EnumPopup(string label, Enum selected, params GUILayoutOption[] options)
@@ -4509,9 +4868,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(new GUIStyle("enumPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("enumPopup"), label);
 
-            return EditorGUI.EnumPopup(_position, label, selected);
+            return EditorGUI.EnumPopup(lastPosition, label, selected);
         }
 
         public Enum EnumPopup(string label, Enum selected, GUIStyle style, params GUILayoutOption[] options)
@@ -4524,9 +4884,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.EnumPopup(_position, label, selected, style);
+            return EditorGUI.EnumPopup(lastPosition, label, selected, style);
         }
 
         public Enum EnumPopup(GUIContent label, Enum selected, params GUILayoutOption[] options)
@@ -4539,9 +4900,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(new GUIStyle("enumPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("enumPopup"), label);
 
-            return EditorGUI.EnumPopup(_position, label, selected);
+            return EditorGUI.EnumPopup(lastPosition, label, selected);
         }
 
         public Enum EnumPopup(GUIContent label, Enum selected, GUIStyle style, params GUILayoutOption[] options)
@@ -4554,9 +4916,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.EnumPopup(_position, label, selected, style);
+            return EditorGUI.EnumPopup(lastPosition, label, selected, style);
         }
 
         public Enum EnumPopup(GUIContent label, Enum selected, Func<Enum, bool> checkEnabled, bool includeObsolete, params GUILayoutOption[] options)
@@ -4569,10 +4932,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(new GUIStyle("enumPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("enumPopup"), label);
 
             // This call has the following (2) unsupported params (an implementation is required): includeObsolete, checkEnabled
-            return EditorGUI.EnumPopup(_position, label, selected);
+            return EditorGUI.EnumPopup(lastPosition, label, selected);
         }
 
         public Enum EnumPopup(GUIContent label, Enum selected, Func<Enum, bool> checkEnabled, bool includeObsolete, GUIStyle style, params GUILayoutOption[] options)
@@ -4585,10 +4949,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("EnumPopup"))
                 stylesDict.Add("EnumPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
             // This call has the following (2) unsupported params (an implementation is required): includeObsolete, checkEnabled
-            return EditorGUI.EnumPopup(_position, label, selected, style);
+            return EditorGUI.EnumPopup(lastPosition, label, selected, style);
         }
 
         public int IntPopup(int selectedValue, string[] displayedOptions, int[] optionValues, params GUILayoutOption[] options)
@@ -4601,9 +4966,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), GUIContent.none);
 
-            return EditorGUI.IntPopup(_position, selectedValue, displayedOptions, optionValues);
+            return EditorGUI.IntPopup(lastPosition, selectedValue, displayedOptions, optionValues);
         }
 
         public int IntPopup(int selectedValue, string[] displayedOptions, int[] optionValues, GUIStyle style, params GUILayoutOption[] options)
@@ -4616,9 +4982,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.IntPopup(_position, selectedValue, displayedOptions, optionValues, style);
+            return EditorGUI.IntPopup(lastPosition, selectedValue, displayedOptions, optionValues, style);
         }
 
         public int IntPopup(int selectedValue, GUIContent[] displayedOptions, int[] optionValues, params GUILayoutOption[] options)
@@ -4631,9 +4998,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -4647,9 +5015,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -4663,9 +5032,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), label);
 
-            return EditorGUI.IntPopup(_position, label, selectedValue, displayedOptions, optionValues);
+            return EditorGUI.IntPopup(lastPosition, label, selectedValue, displayedOptions, optionValues);
         }
 
         public int IntPopup(string label, int selectedValue, string[] displayedOptions, int[] optionValues, GUIStyle style, params GUILayoutOption[] options)
@@ -4678,9 +5048,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.IntPopup(_position, label, selectedValue, displayedOptions, optionValues, style);
+            return EditorGUI.IntPopup(lastPosition, label, selectedValue, displayedOptions, optionValues, style);
         }
 
         public int IntPopup(GUIContent label, int selectedValue, GUIContent[] displayedOptions, int[] optionValues, params GUILayoutOption[] options)
@@ -4693,9 +5064,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -4709,9 +5081,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
             throw new Exception();
         }
 
@@ -4725,9 +5098,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), GUIContent.none);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
         }
 
         public void IntPopup(SerializedProperty property, GUIContent[] displayedOptions, int[] optionValues, GUIContent label, params GUILayoutOption[] options)
@@ -4740,9 +5114,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(new GUIStyle("intPopup"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("intPopup"), label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
         }
 
         public void IntPopup(SerializedProperty property, GUIContent[] displayedOptions, int[] optionValues, GUIContent label, GUIStyle style, params GUILayoutOption[] options)
@@ -4755,9 +5130,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("IntPopup"))
                 stylesDict.Add("IntPopup", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 246)
+            // Couldn't add this line! (Exception: System.InvalidOperationException -- At line: 247)
         }
 
         public string TagField(string tag, params GUILayoutOption[] options)
@@ -4770,9 +5146,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(new GUIStyle("tagField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("tagField"), GUIContent.none);
 
-            return EditorGUI.TagField(_position, tag);
+            return EditorGUI.TagField(lastPosition, tag);
         }
 
         public string TagField(string tag, GUIStyle style, params GUILayoutOption[] options)
@@ -4785,9 +5162,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.TagField(_position, tag, style);
+            return EditorGUI.TagField(lastPosition, tag, style);
         }
 
         public string TagField(string label, string tag, params GUILayoutOption[] options)
@@ -4800,9 +5178,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(new GUIStyle("tagField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("tagField"), label);
 
-            return EditorGUI.TagField(_position, label, tag);
+            return EditorGUI.TagField(lastPosition, label, tag);
         }
 
         public string TagField(string label, string tag, GUIStyle style, params GUILayoutOption[] options)
@@ -4815,9 +5194,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.TagField(_position, label, tag, style);
+            return EditorGUI.TagField(lastPosition, label, tag, style);
         }
 
         public string TagField(GUIContent label, string tag, params GUILayoutOption[] options)
@@ -4830,9 +5210,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(new GUIStyle("tagField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("tagField"), label);
 
-            return EditorGUI.TagField(_position, label, tag);
+            return EditorGUI.TagField(lastPosition, label, tag);
         }
 
         public string TagField(GUIContent label, string tag, GUIStyle style, params GUILayoutOption[] options)
@@ -4845,9 +5226,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("TagField"))
                 stylesDict.Add("TagField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.TagField(_position, label, tag, style);
+            return EditorGUI.TagField(lastPosition, label, tag, style);
         }
 
         public int LayerField(int layer, params GUILayoutOption[] options)
@@ -4860,9 +5242,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(new GUIStyle("layerField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("layerField"), GUIContent.none);
 
-            return EditorGUI.LayerField(_position, layer);
+            return EditorGUI.LayerField(lastPosition, layer);
         }
 
         public int LayerField(int layer, GUIStyle style, params GUILayoutOption[] options)
@@ -4875,9 +5258,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.LayerField(_position, layer, style);
+            return EditorGUI.LayerField(lastPosition, layer, style);
         }
 
         public int LayerField(string label, int layer, params GUILayoutOption[] options)
@@ -4890,9 +5274,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(new GUIStyle("layerField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("layerField"), label);
 
-            return EditorGUI.LayerField(_position, label, layer);
+            return EditorGUI.LayerField(lastPosition, label, layer);
         }
 
         public int LayerField(string label, int layer, GUIStyle style, params GUILayoutOption[] options)
@@ -4905,9 +5290,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.LayerField(_position, label, layer, style);
+            return EditorGUI.LayerField(lastPosition, label, layer, style);
         }
 
         public int LayerField(GUIContent label, int layer, params GUILayoutOption[] options)
@@ -4920,9 +5306,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(new GUIStyle("layerField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("layerField"), label);
 
-            return EditorGUI.LayerField(_position, label, layer);
+            return EditorGUI.LayerField(lastPosition, label, layer);
         }
 
         public int LayerField(GUIContent label, int layer, GUIStyle style, params GUILayoutOption[] options)
@@ -4935,9 +5322,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("LayerField"))
                 stylesDict.Add("LayerField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.LayerField(_position, label, layer, style);
+            return EditorGUI.LayerField(lastPosition, label, layer, style);
         }
 
         public int MaskField(GUIContent label, int mask, string[] displayedOptions, GUIStyle style, params GUILayoutOption[] options)
@@ -4950,9 +5338,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.MaskField(_position, label, mask, displayedOptions, style);
+            return EditorGUI.MaskField(lastPosition, label, mask, displayedOptions, style);
         }
 
         public int MaskField(string label, int mask, string[] displayedOptions, GUIStyle style, params GUILayoutOption[] options)
@@ -4965,9 +5354,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(style, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, label);
 
-            return EditorGUI.MaskField(_position, label, mask, displayedOptions, style);
+            return EditorGUI.MaskField(lastPosition, label, mask, displayedOptions, style);
         }
 
         public int MaskField(GUIContent label, int mask, string[] displayedOptions, params GUILayoutOption[] options)
@@ -4980,9 +5370,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(new GUIStyle("maskField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("maskField"), label);
 
-            return EditorGUI.MaskField(_position, label, mask, displayedOptions);
+            return EditorGUI.MaskField(lastPosition, label, mask, displayedOptions);
         }
 
         public int MaskField(string label, int mask, string[] displayedOptions, params GUILayoutOption[] options)
@@ -4995,9 +5386,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(new GUIStyle("maskField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("maskField"), label);
 
-            return EditorGUI.MaskField(_position, label, mask, displayedOptions);
+            return EditorGUI.MaskField(lastPosition, label, mask, displayedOptions);
         }
 
         public int MaskField(int mask, string[] displayedOptions, GUIStyle style, params GUILayoutOption[] options)
@@ -5010,9 +5402,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(style, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, GUIContent.none);
 
-            return EditorGUI.MaskField(_position, mask, displayedOptions, style);
+            return EditorGUI.MaskField(lastPosition, mask, displayedOptions, style);
         }
 
         public int MaskField(int mask, string[] displayedOptions, params GUILayoutOption[] options)
@@ -5025,9 +5418,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("MaskField"))
                 stylesDict.Add("MaskField", new StyleWrapper(new GUIStyle("maskField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("maskField"), GUIContent.none);
 
-            return EditorGUI.MaskField(_position, mask, displayedOptions);
+            return EditorGUI.MaskField(lastPosition, mask, displayedOptions);
         }
 
         public Enum EnumFlagsField(Enum enumValue, params GUILayoutOption[] options)
@@ -5080,9 +5474,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, GUIContent.none);
 
-            return EditorGUI.ObjectField(_position, obj, objType);
+            return EditorGUI.ObjectField(lastPosition, obj, objType);
         }
 
         public Object ObjectField(Object obj, Type objType, bool allowSceneObjects, params GUILayoutOption[] options)
@@ -5095,9 +5490,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, GUIContent.none);
 
-            return EditorGUI.ObjectField(_position, obj, objType, allowSceneObjects);
+            return EditorGUI.ObjectField(lastPosition, obj, objType, allowSceneObjects);
         }
 
         public Object ObjectField(string label, Object obj, Type objType, params GUILayoutOption[] options)
@@ -5110,9 +5506,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
-            return EditorGUI.ObjectField(_position, label, obj, objType);
+            return EditorGUI.ObjectField(lastPosition, label, obj, objType);
         }
 
         public Object ObjectField(string label, Object obj, Type objType, bool allowSceneObjects, params GUILayoutOption[] options)
@@ -5125,9 +5522,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
-            return EditorGUI.ObjectField(_position, label, obj, objType, allowSceneObjects);
+            return EditorGUI.ObjectField(lastPosition, label, obj, objType, allowSceneObjects);
         }
 
         public Object ObjectField(GUIContent label, Object obj, Type objType, params GUILayoutOption[] options)
@@ -5140,9 +5538,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
-            return EditorGUI.ObjectField(_position, label, obj, objType);
+            return EditorGUI.ObjectField(lastPosition, label, obj, objType);
         }
 
         public Object ObjectField(GUIContent label, Object obj, Type objType, bool allowSceneObjects, params GUILayoutOption[] options)
@@ -5155,9 +5554,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
-            return EditorGUI.ObjectField(_position, label, obj, objType, allowSceneObjects);
+            return EditorGUI.ObjectField(lastPosition, label, obj, objType, allowSceneObjects);
         }
 
         public void ObjectField(SerializedProperty property, params GUILayoutOption[] options)
@@ -5170,9 +5570,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, GUIContent.none);
 
-            EditorGUI.ObjectField(_position, property);
+            EditorGUI.ObjectField(lastPosition, property);
         }
 
         public void ObjectField(SerializedProperty property, GUIContent label, params GUILayoutOption[] options)
@@ -5185,9 +5586,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
-            EditorGUI.ObjectField(_position, property, label);
+            EditorGUI.ObjectField(lastPosition, property, label);
         }
 
         public void ObjectField(SerializedProperty property, Type objType, params GUILayoutOption[] options)
@@ -5200,9 +5602,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, GUIContent.none);
 
-            EditorGUI.ObjectField(_position, property, objType);
+            EditorGUI.ObjectField(lastPosition, property, objType);
         }
 
         public void ObjectField(SerializedProperty property, Type objType, GUIContent label, params GUILayoutOption[] options)
@@ -5215,9 +5618,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ObjectField"))
                 stylesDict.Add("ObjectField", new StyleWrapper(EditorStyles.objectField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.objectField, label);
 
-            EditorGUI.ObjectField(_position, property, objType, label);
+            EditorGUI.ObjectField(lastPosition, property, objType, label);
         }
 
         public Vector2 Vector2Field(string label, Vector2 value, params GUILayoutOption[] options)
@@ -5230,9 +5634,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector2Field"))
                 stylesDict.Add("Vector2Field", new StyleWrapper(new GUIStyle("vector2Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector2Field"), label);
 
-            return EditorGUI.Vector2Field(_position, label, value);
+            return EditorGUI.Vector2Field(lastPosition, label, value);
         }
 
         public Vector2 Vector2Field(GUIContent label, Vector2 value, params GUILayoutOption[] options)
@@ -5245,9 +5650,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector2Field"))
                 stylesDict.Add("Vector2Field", new StyleWrapper(new GUIStyle("vector2Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector2Field"), label);
 
-            return EditorGUI.Vector2Field(_position, label, value);
+            return EditorGUI.Vector2Field(lastPosition, label, value);
         }
 
         public Vector3 Vector3Field(string label, Vector3 value, params GUILayoutOption[] options)
@@ -5260,9 +5666,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector3Field"))
                 stylesDict.Add("Vector3Field", new StyleWrapper(new GUIStyle("vector3Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector3Field"), label);
 
-            return EditorGUI.Vector3Field(_position, label, value);
+            return EditorGUI.Vector3Field(lastPosition, label, value);
         }
 
         public Vector3 Vector3Field(GUIContent label, Vector3 value, params GUILayoutOption[] options)
@@ -5275,9 +5682,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector3Field"))
                 stylesDict.Add("Vector3Field", new StyleWrapper(new GUIStyle("vector3Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector3Field"), label);
 
-            return EditorGUI.Vector3Field(_position, label, value);
+            return EditorGUI.Vector3Field(lastPosition, label, value);
         }
 
         public Vector4 Vector4Field(string label, Vector4 value, params GUILayoutOption[] options)
@@ -5290,9 +5698,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector4Field"))
                 stylesDict.Add("Vector4Field", new StyleWrapper(new GUIStyle("vector4Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector4Field"), label);
 
-            return EditorGUI.Vector4Field(_position, label, value);
+            return EditorGUI.Vector4Field(lastPosition, label, value);
         }
 
         public Vector4 Vector4Field(GUIContent label, Vector4 value, params GUILayoutOption[] options)
@@ -5305,9 +5714,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector4Field"))
                 stylesDict.Add("Vector4Field", new StyleWrapper(new GUIStyle("vector4Field"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector4Field"), label);
 
-            return EditorGUI.Vector4Field(_position, label, value);
+            return EditorGUI.Vector4Field(lastPosition, label, value);
         }
 
         public Vector2Int Vector2IntField(string label, Vector2Int value, params GUILayoutOption[] options)
@@ -5320,9 +5730,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector2IntField"))
                 stylesDict.Add("Vector2IntField", new StyleWrapper(new GUIStyle("vector2IntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector2IntField"), label);
 
-            return EditorGUI.Vector2IntField(_position, label, value);
+            return EditorGUI.Vector2IntField(lastPosition, label, value);
         }
 
         public Vector2Int Vector2IntField(GUIContent label, Vector2Int value, params GUILayoutOption[] options)
@@ -5335,9 +5746,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector2IntField"))
                 stylesDict.Add("Vector2IntField", new StyleWrapper(new GUIStyle("vector2IntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector2IntField"), label);
 
-            return EditorGUI.Vector2IntField(_position, label, value);
+            return EditorGUI.Vector2IntField(lastPosition, label, value);
         }
 
         public Vector3Int Vector3IntField(string label, Vector3Int value, params GUILayoutOption[] options)
@@ -5350,9 +5762,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector3IntField"))
                 stylesDict.Add("Vector3IntField", new StyleWrapper(new GUIStyle("vector3IntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector3IntField"), label);
 
-            return EditorGUI.Vector3IntField(_position, label, value);
+            return EditorGUI.Vector3IntField(lastPosition, label, value);
         }
 
         public Vector3Int Vector3IntField(GUIContent label, Vector3Int value, params GUILayoutOption[] options)
@@ -5365,9 +5778,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("Vector3IntField"))
                 stylesDict.Add("Vector3IntField", new StyleWrapper(new GUIStyle("vector3IntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("vector3IntField"), label);
 
-            return EditorGUI.Vector3IntField(_position, label, value);
+            return EditorGUI.Vector3IntField(lastPosition, label, value);
         }
 
         public Rect RectField(Rect value, params GUILayoutOption[] options)
@@ -5380,9 +5794,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectField"))
                 stylesDict.Add("RectField", new StyleWrapper(new GUIStyle("rectField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectField"), GUIContent.none);
 
-            return EditorGUI.RectField(_position, value);
+            return EditorGUI.RectField(lastPosition, value);
         }
 
         public Rect RectField(string label, Rect value, params GUILayoutOption[] options)
@@ -5395,9 +5810,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectField"))
                 stylesDict.Add("RectField", new StyleWrapper(new GUIStyle("rectField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectField"), label);
 
-            return EditorGUI.RectField(_position, label, value);
+            return EditorGUI.RectField(lastPosition, label, value);
         }
 
         public Rect RectField(GUIContent label, Rect value, params GUILayoutOption[] options)
@@ -5410,9 +5826,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectField"))
                 stylesDict.Add("RectField", new StyleWrapper(new GUIStyle("rectField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectField"), label);
 
-            return EditorGUI.RectField(_position, label, value);
+            return EditorGUI.RectField(lastPosition, label, value);
         }
 
         public RectInt RectIntField(RectInt value, params GUILayoutOption[] options)
@@ -5425,9 +5842,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectIntField"))
                 stylesDict.Add("RectIntField", new StyleWrapper(new GUIStyle("rectIntField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectIntField"), GUIContent.none);
 
-            return EditorGUI.RectIntField(_position, value);
+            return EditorGUI.RectIntField(lastPosition, value);
         }
 
         public RectInt RectIntField(string label, RectInt value, params GUILayoutOption[] options)
@@ -5440,9 +5858,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectIntField"))
                 stylesDict.Add("RectIntField", new StyleWrapper(new GUIStyle("rectIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectIntField"), label);
 
-            return EditorGUI.RectIntField(_position, label, value);
+            return EditorGUI.RectIntField(lastPosition, label, value);
         }
 
         public RectInt RectIntField(GUIContent label, RectInt value, params GUILayoutOption[] options)
@@ -5455,9 +5874,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("RectIntField"))
                 stylesDict.Add("RectIntField", new StyleWrapper(new GUIStyle("rectIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("rectIntField"), label);
 
-            return EditorGUI.RectIntField(_position, label, value);
+            return EditorGUI.RectIntField(lastPosition, label, value);
         }
 
         public Bounds BoundsField(Bounds value, params GUILayoutOption[] options)
@@ -5470,9 +5890,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsField"))
                 stylesDict.Add("BoundsField", new StyleWrapper(new GUIStyle("boundsField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsField"), GUIContent.none);
 
-            return EditorGUI.BoundsField(_position, value);
+            return EditorGUI.BoundsField(lastPosition, value);
         }
 
         public Bounds BoundsField(string label, Bounds value, params GUILayoutOption[] options)
@@ -5485,9 +5906,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsField"))
                 stylesDict.Add("BoundsField", new StyleWrapper(new GUIStyle("boundsField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsField"), label);
 
-            return EditorGUI.BoundsField(_position, label, value);
+            return EditorGUI.BoundsField(lastPosition, label, value);
         }
 
         public Bounds BoundsField(GUIContent label, Bounds value, params GUILayoutOption[] options)
@@ -5500,9 +5922,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsField"))
                 stylesDict.Add("BoundsField", new StyleWrapper(new GUIStyle("boundsField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsField"), label);
 
-            return EditorGUI.BoundsField(_position, label, value);
+            return EditorGUI.BoundsField(lastPosition, label, value);
         }
 
         public BoundsInt BoundsIntField(BoundsInt value, params GUILayoutOption[] options)
@@ -5515,9 +5938,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsIntField"))
                 stylesDict.Add("BoundsIntField", new StyleWrapper(new GUIStyle("boundsIntField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsIntField"), GUIContent.none);
 
-            return EditorGUI.BoundsIntField(_position, value);
+            return EditorGUI.BoundsIntField(lastPosition, value);
         }
 
         public BoundsInt BoundsIntField(string label, BoundsInt value, params GUILayoutOption[] options)
@@ -5530,9 +5954,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsIntField"))
                 stylesDict.Add("BoundsIntField", new StyleWrapper(new GUIStyle("boundsIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsIntField"), label);
 
-            return EditorGUI.BoundsIntField(_position, label, value);
+            return EditorGUI.BoundsIntField(lastPosition, label, value);
         }
 
         public BoundsInt BoundsIntField(GUIContent label, BoundsInt value, params GUILayoutOption[] options)
@@ -5545,9 +5970,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("BoundsIntField"))
                 stylesDict.Add("BoundsIntField", new StyleWrapper(new GUIStyle("boundsIntField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("boundsIntField"), label);
 
-            return EditorGUI.BoundsIntField(_position, label, value);
+            return EditorGUI.BoundsIntField(lastPosition, label, value);
         }
 
         public Color ColorField(Color value, params GUILayoutOption[] options)
@@ -5560,9 +5986,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ColorField"))
                 stylesDict.Add("ColorField", new StyleWrapper(EditorStyles.colorField, GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.colorField, GUIContent.none);
 
-            return EditorGUI.ColorField(_position, value);
+            return EditorGUI.ColorField(lastPosition, value);
         }
 
         public Color ColorField(string label, Color value, params GUILayoutOption[] options)
@@ -5575,9 +6002,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ColorField"))
                 stylesDict.Add("ColorField", new StyleWrapper(EditorStyles.colorField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.colorField, label);
 
-            return EditorGUI.ColorField(_position, label, value);
+            return EditorGUI.ColorField(lastPosition, label, value);
         }
 
         public Color ColorField(GUIContent label, Color value, params GUILayoutOption[] options)
@@ -5590,9 +6018,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ColorField"))
                 stylesDict.Add("ColorField", new StyleWrapper(EditorStyles.colorField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.colorField, label);
 
-            return EditorGUI.ColorField(_position, label, value);
+            return EditorGUI.ColorField(lastPosition, label, value);
         }
 
         public Color ColorField(GUIContent label, Color value, bool showEyedropper, bool showAlpha, bool hdr, params GUILayoutOption[] options)
@@ -5605,9 +6034,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("ColorField"))
                 stylesDict.Add("ColorField", new StyleWrapper(EditorStyles.colorField, label));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.colorField, label);
 
-            return EditorGUI.ColorField(_position, label, value, showEyedropper, showAlpha, hdr);
+            return EditorGUI.ColorField(lastPosition, label, value, showEyedropper, showAlpha, hdr);
         }
 
         public AnimationCurve CurveField(AnimationCurve value, params GUILayoutOption[] options)
@@ -5620,9 +6050,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), GUIContent.none);
 
-            return EditorGUI.CurveField(_position, value);
+            return EditorGUI.CurveField(lastPosition, value);
         }
 
         public AnimationCurve CurveField(string label, AnimationCurve value, params GUILayoutOption[] options)
@@ -5635,9 +6066,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
-            return EditorGUI.CurveField(_position, label, value);
+            return EditorGUI.CurveField(lastPosition, label, value);
         }
 
         public AnimationCurve CurveField(GUIContent label, AnimationCurve value, params GUILayoutOption[] options)
@@ -5650,9 +6082,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
-            return EditorGUI.CurveField(_position, label, value);
+            return EditorGUI.CurveField(lastPosition, label, value);
         }
 
         public AnimationCurve CurveField(AnimationCurve value, Color color, Rect ranges, params GUILayoutOption[] options)
@@ -5665,9 +6098,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), GUIContent.none);
 
-            return EditorGUI.CurveField(_position, value, color, ranges);
+            return EditorGUI.CurveField(lastPosition, value, color, ranges);
         }
 
         public AnimationCurve CurveField(string label, AnimationCurve value, Color color, Rect ranges, params GUILayoutOption[] options)
@@ -5680,9 +6114,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
-            return EditorGUI.CurveField(_position, label, value, color, ranges);
+            return EditorGUI.CurveField(lastPosition, label, value, color, ranges);
         }
 
         public AnimationCurve CurveField(GUIContent label, AnimationCurve value, Color color, Rect ranges, params GUILayoutOption[] options)
@@ -5695,9 +6130,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
-            return EditorGUI.CurveField(_position, label, value, color, ranges);
+            return EditorGUI.CurveField(lastPosition, label, value, color, ranges);
         }
 
         public void CurveField(SerializedProperty property, Color color, Rect ranges, params GUILayoutOption[] options)
@@ -5710,9 +6146,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), GUIContent.none);
 
-            EditorGUI.CurveField(_position, property, color, ranges);
+            EditorGUI.CurveField(lastPosition, property, color, ranges);
         }
 
         public void CurveField(SerializedProperty property, Color color, Rect ranges, GUIContent label, params GUILayoutOption[] options)
@@ -5725,9 +6162,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("CurveField"))
                 stylesDict.Add("CurveField", new StyleWrapper(new GUIStyle("curveField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("curveField"), label);
 
-            EditorGUI.CurveField(_position, property, color, ranges, label);
+            EditorGUI.CurveField(lastPosition, property, color, ranges, label);
         }
 
         public bool InspectorTitlebar(bool foldout, Object targetObj)
@@ -5766,9 +6204,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("HelpBox"))
                 stylesDict.Add("HelpBox", new StyleWrapper(EditorStyles.helpBox, message));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.helpBox, message);
 
-            EditorGUI.HelpBox(_position, message, type);
+            EditorGUI.HelpBox(lastPosition, message, type);
         }
 
         public void HelpBox(string message, MessageType type, bool wide)
@@ -5777,10 +6216,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("HelpBox"))
                 stylesDict.Add("HelpBox", new StyleWrapper(EditorStyles.helpBox, message));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.helpBox, message);
 
             // This call has the following (1) unsupported params (an implementation is required): wide
-            EditorGUI.HelpBox(_position, message, type);
+            EditorGUI.HelpBox(lastPosition, message, type);
         }
 
         public void HelpBox(GUIContent content, bool wide = true)
@@ -5789,10 +6229,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("HelpBox"))
                 stylesDict.Add("HelpBox", new StyleWrapper(EditorStyles.helpBox, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(EditorStyles.helpBox, content);
 
             // This call has the following (1) unsupported params (an implementation is required): wide
-            EditorGUI.HelpBox(_position, content.text, default(MessageType));
+            EditorGUI.HelpBox(lastPosition, content.text, default(MessageType));
         }
 
         public bool BeginToggleGroup(string label, bool toggle)
@@ -5860,9 +6301,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PropertyField"))
                 stylesDict.Add("PropertyField", new StyleWrapper(new GUIStyle("propertyField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("propertyField"), GUIContent.none);
 
-            return EditorGUI.PropertyField(_position, property);
+            return EditorGUI.PropertyField(lastPosition, property);
         }
 
         public bool PropertyField(SerializedProperty property, GUIContent label, params GUILayoutOption[] options)
@@ -5875,9 +6317,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PropertyField"))
                 stylesDict.Add("PropertyField", new StyleWrapper(new GUIStyle("propertyField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("propertyField"), label);
 
-            return EditorGUI.PropertyField(_position, property, label);
+            return EditorGUI.PropertyField(lastPosition, property, label);
         }
 
         public bool PropertyField(SerializedProperty property, bool includeChildren, params GUILayoutOption[] options)
@@ -5890,9 +6333,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PropertyField"))
                 stylesDict.Add("PropertyField", new StyleWrapper(new GUIStyle("propertyField"), GUIContent.none));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("propertyField"), GUIContent.none);
 
-            return EditorGUI.PropertyField(_position, property, includeChildren);
+            return EditorGUI.PropertyField(lastPosition, property, includeChildren);
         }
 
         public bool PropertyField(SerializedProperty property, GUIContent label, bool includeChildren, params GUILayoutOption[] options)
@@ -5905,9 +6349,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("PropertyField"))
                 stylesDict.Add("PropertyField", new StyleWrapper(new GUIStyle("propertyField"), label));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("propertyField"), label);
 
-            return EditorGUI.PropertyField(_position, property, label, includeChildren);
+            return EditorGUI.PropertyField(lastPosition, property, label, includeChildren);
         }
 
         public Rect GetControlRect(params GUILayoutOption[] options)
@@ -5945,9 +6390,10 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DropdownButton"))
                 stylesDict.Add("DropdownButton", new StyleWrapper(new GUIStyle("dropdownButton"), content));
 
+            Rect lastPosition = _position;
             UpdatePosition(new GUIStyle("dropdownButton"), content);
 
-            return EditorGUI.DropdownButton(_position, content, focusType);
+            return EditorGUI.DropdownButton(lastPosition, content, focusType);
         }
 
         public bool DropdownButton(GUIContent content, FocusType focusType, GUIStyle style, params GUILayoutOption[] options)
@@ -5960,11 +6406,11 @@ namespace z3nth10n.EditorUtils
             if (!stylesDict.ContainsKey("DropdownButton"))
                 stylesDict.Add("DropdownButton", new StyleWrapper(style, content));
 
+            Rect lastPosition = _position;
             UpdatePosition(style, content);
 
-            return EditorGUI.DropdownButton(_position, content, focusType, style);
+            return EditorGUI.DropdownButton(lastPosition, content, focusType, style);
         }
-
 
         public float GetHeight()
         {
@@ -5981,7 +6427,7 @@ namespace z3nth10n.EditorUtils
             UpdatePosition(style, new GUIContent(label));
         }
 
-        private void UpdatePosition(GUIStyle style, GUIContent content)
+        /*private void UpdatePosition(GUIStyle style, GUIContent content)
         {
             Vector2 vector = style.CalcSize(content);
 
@@ -5993,7 +6439,7 @@ namespace z3nth10n.EditorUtils
             _position.xMin = vector.y;
             _position.width = width;
             _position.height = height;
-        }
+        }*/
     }
 
     public class Converters : GUIContent

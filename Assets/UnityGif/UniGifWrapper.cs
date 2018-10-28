@@ -26,11 +26,6 @@ namespace UnityGif
             {
             }
 
-            public GifFile(byte[] array)
-            {
-                data = SetDataFromEditor(array);
-            }
-
             public GifFile(string path)
             {
                 this.path = path;
@@ -113,19 +108,6 @@ namespace UnityGif
             {
                 UniGif.Draw(myRect, data);
             }
-
-            public void DrawFromEditor(Rect r)
-            {
-                if (data != null)
-                    UniGif.Draw(r, data);
-                else
-                    Debug.LogWarning("Something unexpected happened!");
-            }
-
-            private WrapperData SetDataFromEditor(byte[] array)
-            {
-                return LoadFromEditor(array);
-            }
         }
 
         public class WrapperData
@@ -186,14 +168,6 @@ namespace UnityGif
 
             foreach (GifFile gif in gifs)
                 LoadFrom(mono, gif.path);
-        }
-
-        public static WrapperData LoadFromEditor(byte[] array)
-        {
-            if (array == null)
-                throw new ArgumentException("array");
-
-            return InternalCallbackEditor(array);
         }
 
         public static void LoadFrom(this MonoBehaviour mono, GifFile gif)
@@ -286,24 +260,6 @@ namespace UnityGif
             yield return Ninja.JumpToUnity;
 
             yield return InternalCallback(bytes, wrapperData, path);
-        }
-
-        private static WrapperData InternalCallbackEditor(byte[] bytes)
-        {
-            WrapperData wrapperData = new WrapperData();
-
-            var num = GetTextureListCoroutine(bytes, (gtList, loop, w, h) =>
-            {
-                wrapperData.list = gtList;
-                wrapperData.width = w;
-                wrapperData.height = h;
-            }, wrapperData.filterMode, wrapperData.wrapMode, wrapperData.outputDebugLog);
-
-            while (num.MoveNext())
-            {
-            }
-
-            return wrapperData;
         }
 
         private static IEnumerator InternalCallback(byte[] bytes, WrapperData wrapperData, string path)
