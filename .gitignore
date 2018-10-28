@@ -31,3 +31,8 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# Custom
+
+/Assets/Resources/
+/.vs/
