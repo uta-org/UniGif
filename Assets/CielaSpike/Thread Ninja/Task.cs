@@ -1,10 +1,6 @@
-using UnityEngine;
-
-using System.Linq;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
+using UnityEngine;
 
 namespace CielaSpike
 {
@@ -14,7 +10,9 @@ namespace CielaSpike
     public class Task : IEnumerator
     {
         // implements IEnumerator to make it usable by StartCoroutine;
+
         #region IEnumerator Interface
+
         /// <summary>
         /// The current iterator yield return value.
         /// </summary>
@@ -35,7 +33,8 @@ namespace CielaSpike
             throw new System.NotSupportedException(
                 "Not support calling Reset() on iterator.");
         }
-        #endregion
+
+        #endregion IEnumerator Interface
 
         // inner running state used by state machine;
         private enum RunningState
@@ -55,8 +54,10 @@ namespace CielaSpike
 
         // current running state;
         private RunningState _state;
+
         // last running state;
         private RunningState _previousState;
+
         // temporary stores current yield return value
         // until we think Unity coroutine engine is OK to get it;
         private object _pendingCurrent;
@@ -72,12 +73,16 @@ namespace CielaSpike
                 {
                     case RunningState.CancellationRequested:
                         return TaskState.Cancelled;
+
                     case RunningState.Done:
                         return TaskState.Done;
+
                     case RunningState.Error:
                         return TaskState.Error;
+
                     case RunningState.Init:
                         return TaskState.Init;
+
                     default:
                         return TaskState.Running;
                 }
@@ -195,7 +200,7 @@ namespace CielaSpike
                             // yield from background thread, or main thread?
                             if (_previousState == RunningState.RunningAsync)
                             {
-                                // if from background thread, 
+                                // if from background thread,
                                 // go back into background in the next loop;
                                 _pendingCurrent = Ninja.JumpBack;
                             }

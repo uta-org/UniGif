@@ -1,10 +1,3 @@
-using UnityEngine;
-
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-
 namespace CielaSpike
 {
     /// <summary>
@@ -16,6 +9,7 @@ namespace CielaSpike
         /// Yield return it to switch to Unity main thread.
         /// </summary>
         public static readonly object JumpToUnity;
+
         /// <summary>
         /// Yield return it to switch to background thread.
         /// </summary>
