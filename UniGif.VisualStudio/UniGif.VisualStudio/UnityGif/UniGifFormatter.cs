@@ -8,7 +8,7 @@ http://opensource.org/licenses/mit-license.php
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Extensions;
+using uzLib.Lite.ExternalCode.Extensions;
 
 namespace UnityGif
 {
@@ -138,7 +138,7 @@ namespace UnityGif
 
                 // Size of Global Color Table(3 Bits)
                 var val = (gifBytes[10] & 7) + 1;
-                gifData.m_sizeOfGlobalColorTable = (int) Math.Pow(2, val);
+                gifData.m_sizeOfGlobalColorTable = (int)Math.Pow(2, val);
             }
 
             // Background Color Index(1 Byte)
@@ -153,7 +153,7 @@ namespace UnityGif
                 // Global Color Table(0～255×3 Bytes)
                 gifData.m_globalColorTable = new List<byte[]>();
                 for (var i = byteIndex; i < byteIndex + gifData.m_sizeOfGlobalColorTable * 3; i += 3)
-                    gifData.m_globalColorTable.Add(new[] {gifBytes[i], gifBytes[i + 1], gifBytes[i + 2]});
+                    gifData.m_globalColorTable.Add(new[] { gifBytes[i], gifBytes[i + 1], gifBytes[i + 2] });
                 byteIndex = byteIndex + gifData.m_sizeOfGlobalColorTable * 3;
             }
 
@@ -241,7 +241,7 @@ namespace UnityGif
 
         private static void SetImageBlock(byte[] gifBytes, ref int byteIndex, ref GifData gifData)
         {
-            var ib = new ImageBlock {offsetByte = byteIndex};
+            var ib = new ImageBlock { offsetByte = byteIndex };
 
             // Image Separator(1 Byte)
             // 0x2c
@@ -280,7 +280,7 @@ namespace UnityGif
 
                 // Size of Local Color Table(3 Bits)
                 var val = (gifBytes[byteIndex] & 7) + 1;
-                ib.m_sizeOfLocalColorTable = (int) Math.Pow(2, val);
+                ib.m_sizeOfLocalColorTable = (int)Math.Pow(2, val);
 
                 byteIndex++;
             }
@@ -290,7 +290,7 @@ namespace UnityGif
                 // Local Color Table(0～255×3 Bytes)
                 ib.m_localColorTable = new List<byte[]>();
                 for (var i = byteIndex; i < byteIndex + ib.m_sizeOfLocalColorTable * 3; i += 3)
-                    ib.m_localColorTable.Add(new[] {gifBytes[i], gifBytes[i + 1], gifBytes[i + 2]});
+                    ib.m_localColorTable.Add(new[] { gifBytes[i], gifBytes[i + 1], gifBytes[i + 2] });
                 byteIndex = byteIndex + ib.m_sizeOfLocalColorTable * 3;
             }
 
@@ -336,7 +336,7 @@ namespace UnityGif
 
         private static void SetGraphicControlExtension(byte[] gifBytes, ref int byteIndex, ref GifData gifData)
         {
-            var gcEx = new GraphicControlExtension {offsetByte = byteIndex};
+            var gcEx = new GraphicControlExtension { offsetByte = byteIndex };
 
             // Extension Introducer(1 Byte)
             // 0x21

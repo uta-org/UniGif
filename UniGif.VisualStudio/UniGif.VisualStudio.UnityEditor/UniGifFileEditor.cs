@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.Extensions;
 using UnityEngine.Global.IMGUI;
 using UnityEngine.UI.Effects;
+using uzLib.Lite.ExternalCode.Extensions;
 using Object = UnityEngine.Object;
-using RectHelper = UnityEngine.Extensions.RectHelper.RectWrapper;
 
 namespace UnityGif.Editor
 {

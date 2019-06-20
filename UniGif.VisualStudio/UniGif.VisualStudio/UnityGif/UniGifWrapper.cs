@@ -8,6 +8,7 @@ using CielaSpike;
 using UnityEngine;
 using UnityEngine.Extensions;
 using UnityEngine.Networking;
+using uzLib.Lite.ExternalCode.Extensions;
 
 namespace UnityGif
 {
@@ -320,7 +321,7 @@ namespace UnityGif
             }
 
             // Note: Used only on Editor
-            public void Draw(RectHelper.RectWrapper wrapper, float maxWidth = 200)
+            public void Draw(RectHelper wrapper, float maxWidth = 200)
             {
                 if (Data == null)
                     return;

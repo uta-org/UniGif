@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Extensions;
+using uzLib.Lite.ExternalCode.Extensions;
 
 namespace UnityGif
 {

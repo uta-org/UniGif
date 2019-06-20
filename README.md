@@ -4,6 +4,7 @@ UniGif
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/mit-license.php)
 [![GitHub Stars](https://img.shields.io/github/stars/WestHillApps/UniGif.svg)](https://github.com/WestHillApps/UniGif/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/WestHillApps/UniGif.svg)](https://github.com/WestHillApps/UniGif/network)
+[![NuGet version (UniGif)](https://img.shields.io/nuget/v/UniGif.svg?style=flat-square)](https://www.nuget.org/packages/UniGif/)
 
 GIF image decoder for Unity.  
 
