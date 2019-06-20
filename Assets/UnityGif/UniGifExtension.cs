@@ -1,15 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace UnityGif
 {
     /// <summary>
-    /// Extension methods class
+    ///     Extension methods class
     /// </summary>
     public static class UniGifExtension
     {
         /// <summary>
-        /// Convert BitArray to int (Specifies the start index and bit length)
+        ///     Convert BitArray to int (Specifies the start index and bit length)
         /// </summary>
         /// <param name="startIndex">Start index</param>
         /// <param name="bitLength">Bit length</param>
@@ -18,24 +18,22 @@ namespace UnityGif
         {
             var newArray = new BitArray(bitLength);
 
-            for (int i = 0; i < bitLength; i++)
-            {
+            for (var i = 0; i < bitLength; i++)
                 if (array.Length <= startIndex + i)
                 {
                     newArray[i] = false;
                 }
                 else
                 {
-                    bool bit = array.Get(startIndex + i);
+                    var bit = array.Get(startIndex + i);
                     newArray[i] = bit;
                 }
-            }
 
             return newArray.ToNumeral();
         }
 
         /// <summary>
-        /// Convert BitArray to int
+        ///     Convert BitArray to int
         /// </summary>
         /// <returns>Converted int</returns>
         public static int ToNumeral(this BitArray array)
@@ -45,6 +43,7 @@ namespace UnityGif
                 Debug.LogError("array is nothing.");
                 return 0;
             }
+
             if (array.Length > 32)
             {
                 Debug.LogError("must be at most 32 bits long.");

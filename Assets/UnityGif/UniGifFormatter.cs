@@ -8,13 +8,14 @@ http://opensource.org/licenses/mit-license.php
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace UnityGif
 {
     public static partial class UniGif
     {
         /// <summary>
-        /// Set GIF data
+        ///     Set GIF data
         /// </summary>
         /// <param name="gifBytes">GIF byte data</param>
         /// <param name="gifData">ref GIF data</param>
@@ -22,10 +23,12 @@ namespace UnityGif
         /// <returns>Result</returns>
         private static bool SetGifData(byte[] gifBytes, ref GifData gifData, bool debugLog)
         {
-            if (debugLog)
-            {
-                Debug.Log("SetGifData Start.");
-            }
+            if (debugLog) Debug.Log("SetGifData Start.");
+
+            //if (!_gifData.HasValue)
+            //    throw new ArgumentNullException(nameof(_gifData));
+
+            //var gifData = _gifData.Value;
 
             if (gifBytes == null || gifBytes.Length <= 0)
             {
@@ -33,15 +36,15 @@ namespace UnityGif
                 return false;
             }
 
-            int byteIndex = 0;
+            var byteIndex = 0;
 
-            if (SetGifHeader(gifBytes, ref byteIndex, ref gifData) == false)
+            if (!SetGifHeader(gifBytes, ref byteIndex, ref gifData))
             {
                 Debug.LogError("GIF header set error.");
                 return false;
             }
 
-            if (SetGifBlock(gifBytes, ref byteIndex, ref gifData) == false)
+            if (!SetGifBlock(gifBytes, ref byteIndex, ref gifData))
             {
                 Debug.LogError("GIF block set error.");
                 return false;
@@ -52,6 +55,7 @@ namespace UnityGif
                 gifData.Dump();
                 Debug.Log("SetGifData Finish.");
             }
+
             return true;
         }
 
@@ -133,8 +137,8 @@ namespace UnityGif
                 gifData.m_sortFlag = (gifBytes[10] & 8) == 8; // 0b00001000
 
                 // Size of Global Color Table(3 Bits)
-                int val = (gifBytes[10] & 7) + 1;
-                gifData.m_sizeOfGlobalColorTable = (int)Math.Pow(2, val);
+                var val = (gifBytes[10] & 7) + 1;
+                gifData.m_sizeOfGlobalColorTable = (int) Math.Pow(2, val);
             }
 
             // Background Color Index(1 Byte)
@@ -148,12 +152,12 @@ namespace UnityGif
             {
                 // Global Color Table(0～255×3 Bytes)
                 gifData.m_globalColorTable = new List<byte[]>();
-                for (int i = byteIndex; i < byteIndex + (gifData.m_sizeOfGlobalColorTable * 3); i += 3)
-                {
-                    gifData.m_globalColorTable.Add(new byte[] { gifBytes[i], gifBytes[i + 1], gifBytes[i + 2] });
-                }
-                byteIndex = byteIndex + (gifData.m_sizeOfGlobalColorTable * 3);
+                for (var i = byteIndex; i < byteIndex + gifData.m_sizeOfGlobalColorTable * 3; i += 3)
+                    gifData.m_globalColorTable.Add(new[] {gifBytes[i], gifBytes[i + 1], gifBytes[i + 2]});
+                byteIndex = byteIndex + gifData.m_sizeOfGlobalColorTable * 3;
             }
+
+            // Debug.Log($"[Reading GIF Header] Number of colors in table: {gifData.m_sizeOfGlobalColorTable} || Last byte index: {byteIndex} || Color resolution: {gifData.m_colorResolution}");
 
             return true;
         }
@@ -162,10 +166,16 @@ namespace UnityGif
         {
             try
             {
-                int lastIndex = 0;
+                var blockIndex = 0;
+                var lastIndex = 0;
                 while (true)
                 {
-                    int nowIndex = byteIndex;
+                    var nowIndex = byteIndex;
+
+                    // Note: Some Gifs has 2 blocks more, one for application and another one for the trailer
+                    // TODO: Get String from byte type
+                    //Debug.Log($"Gif Block #{blockIndex} starting at {byteIndex} (Type: {gifBytes[nowIndex].ConvertToHex()} " +
+                    //    (gifBytes.Length == nowIndex + 1 ? ")" : $"|| After Type (if available): {gifBytes[nowIndex + 1].ConvertToHex()})"));
 
                     if (gifBytes[nowIndex] == 0x2c)
                     {
@@ -198,6 +208,7 @@ namespace UnityGif
                                 break;
 
                             default:
+                                Debug.LogError($"Unrecognized control byte: {gifBytes[nowIndex + 1].ConvertToHex()}");
                                 break;
                         }
                     }
@@ -216,6 +227,7 @@ namespace UnityGif
                     }
 
                     lastIndex = nowIndex;
+                    ++blockIndex;
                 }
             }
             catch (Exception ex)
@@ -229,7 +241,7 @@ namespace UnityGif
 
         private static void SetImageBlock(byte[] gifBytes, ref int byteIndex, ref GifData gifData)
         {
-            ImageBlock ib = new ImageBlock();
+            var ib = new ImageBlock {offsetByte = byteIndex};
 
             // Image Separator(1 Byte)
             // 0x2c
@@ -267,8 +279,8 @@ namespace UnityGif
                 // Unused
 
                 // Size of Local Color Table(3 Bits)
-                int val = (gifBytes[byteIndex] & 7) + 1;
-                ib.m_sizeOfLocalColorTable = (int)Math.Pow(2, val);
+                var val = (gifBytes[byteIndex] & 7) + 1;
+                ib.m_sizeOfLocalColorTable = (int) Math.Pow(2, val);
 
                 byteIndex++;
             }
@@ -277,11 +289,9 @@ namespace UnityGif
             {
                 // Local Color Table(0～255×3 Bytes)
                 ib.m_localColorTable = new List<byte[]>();
-                for (int i = byteIndex; i < byteIndex + (ib.m_sizeOfLocalColorTable * 3); i += 3)
-                {
-                    ib.m_localColorTable.Add(new byte[] { gifBytes[i], gifBytes[i + 1], gifBytes[i + 2] });
-                }
-                byteIndex = byteIndex + (ib.m_sizeOfLocalColorTable * 3);
+                for (var i = byteIndex; i < byteIndex + ib.m_sizeOfLocalColorTable * 3; i += 3)
+                    ib.m_localColorTable.Add(new[] {gifBytes[i], gifBytes[i + 1], gifBytes[i + 2]});
+                byteIndex = byteIndex + ib.m_sizeOfLocalColorTable * 3;
             }
 
             // LZW Minimum Code Size(1 Byte)
@@ -292,43 +302,41 @@ namespace UnityGif
             while (true)
             {
                 // Block Size(1 Byte)
-                byte blockSize = gifBytes[byteIndex];
+                var blockSize = gifBytes[byteIndex];
                 byteIndex++;
 
                 if (blockSize == 0x00)
-                {
                     // Block Terminator(1 Byte)
                     break;
-                }
 
                 var imageDataBlock = new ImageBlock.ImageDataBlock();
                 imageDataBlock.m_blockSize = blockSize;
 
                 // Image Data(? Bytes)
                 imageDataBlock.m_imageData = new byte[imageDataBlock.m_blockSize];
-                for (int i = 0; i < imageDataBlock.m_imageData.Length; i++)
+                for (var i = 0; i < imageDataBlock.m_imageData.Length; i++)
                 {
                     imageDataBlock.m_imageData[i] = gifBytes[byteIndex];
                     byteIndex++;
                 }
 
-                if (ib.m_imageDataList == null)
-                {
-                    ib.m_imageDataList = new List<ImageBlock.ImageDataBlock>();
-                }
+                if (ib.m_imageDataList == null) ib.m_imageDataList = new List<ImageBlock.ImageDataBlock>();
+
                 ib.m_imageDataList.Add(imageDataBlock);
+                // Debug.Log($"Adding Image Data Block at {byteIndex}");
             }
 
-            if (gifData.m_imageBlockList == null)
-            {
-                gifData.m_imageBlockList = new List<ImageBlock>();
-            }
+            ib.endByte = byteIndex;
+
+            if (gifData.m_imageBlockList == null) gifData.m_imageBlockList = new List<ImageBlock>();
+
             gifData.m_imageBlockList.Add(ib);
+            // Debug.Log($"Adding Image Block at {byteIndex}");
         }
 
         private static void SetGraphicControlExtension(byte[] gifBytes, ref int byteIndex, ref GifData gifData)
         {
-            GraphicControlExtension gcEx = new GraphicControlExtension();
+            var gcEx = new GraphicControlExtension {offsetByte = byteIndex};
 
             // Extension Introducer(1 Byte)
             // 0x21
@@ -356,16 +364,17 @@ namespace UnityGif
                 // 2 (Restore to background color)
                 // 3 (Restore to previous)
                 switch (gifBytes[byteIndex] & 28)
-                { // 0b00011100
-                    case 4:     // 0b00000100
+                {
+                    // 0b00011100
+                    case 4: // 0b00000100
                         gcEx.m_disposalMethod = 1;
                         break;
 
-                    case 8:     // 0b00001000
+                    case 8: // 0b00001000
                         gcEx.m_disposalMethod = 2;
                         break;
 
-                    case 12:    // 0b00001100
+                    case 12: // 0b00001100
                         gcEx.m_disposalMethod = 3;
                         break;
 
@@ -395,16 +404,15 @@ namespace UnityGif
             gcEx.m_blockTerminator = gifBytes[byteIndex];
             byteIndex++;
 
-            if (gifData.m_graphicCtrlExList == null)
-            {
-                gifData.m_graphicCtrlExList = new List<GraphicControlExtension>();
-            }
+            gcEx.endByte = byteIndex;
+
+            if (gifData.m_graphicCtrlExList == null) gifData.m_graphicCtrlExList = new List<GraphicControlExtension>();
             gifData.m_graphicCtrlExList.Add(gcEx);
         }
 
         private static void SetCommentExtension(byte[] gifBytes, ref int byteIndex, ref GifData gifData)
         {
-            CommentExtension commentEx = new CommentExtension();
+            var commentEx = new CommentExtension();
 
             // Extension Introducer(1 Byte)
             // 0x21
@@ -420,43 +428,36 @@ namespace UnityGif
             while (true)
             {
                 // Block Size(1 Byte)
-                byte blockSize = gifBytes[byteIndex];
+                var blockSize = gifBytes[byteIndex];
                 byteIndex++;
 
                 if (blockSize == 0x00)
-                {
                     // Block Terminator(1 Byte)
                     break;
-                }
 
                 var commentDataBlock = new CommentExtension.CommentDataBlock();
                 commentDataBlock.m_blockSize = blockSize;
 
                 // Comment Data(n Byte)
                 commentDataBlock.m_commentData = new byte[commentDataBlock.m_blockSize];
-                for (int i = 0; i < commentDataBlock.m_commentData.Length; i++)
+                for (var i = 0; i < commentDataBlock.m_commentData.Length; i++)
                 {
                     commentDataBlock.m_commentData[i] = gifBytes[byteIndex];
                     byteIndex++;
                 }
 
                 if (commentEx.m_commentDataList == null)
-                {
                     commentEx.m_commentDataList = new List<CommentExtension.CommentDataBlock>();
-                }
                 commentEx.m_commentDataList.Add(commentDataBlock);
             }
 
-            if (gifData.m_commentExList == null)
-            {
-                gifData.m_commentExList = new List<CommentExtension>();
-            }
+            if (gifData.m_commentExList == null) gifData.m_commentExList = new List<CommentExtension>();
             gifData.m_commentExList.Add(commentEx);
         }
 
         private static void SetPlainTextExtension(byte[] gifBytes, ref int byteIndex, ref GifData gifData)
         {
-            PlainTextExtension plainTxtEx = new PlainTextExtension();
+            var plainTxtEx = new PlainTextExtension();
 
             // Extension Introducer(1 Byte)
             // 0x21
@@ -509,37 +510,30 @@ namespace UnityGif
             while (true)
             {
                 // Block Size(1 Byte)
-                byte blockSize = gifBytes[byteIndex];
+                var blockSize = gifBytes[byteIndex];
                 byteIndex++;
 
                 if (blockSize == 0x00)
-                {
                     // Block Terminator(1 Byte)
                     break;
-                }
 
                 var plainTextDataBlock = new PlainTextExtension.PlainTextDataBlock();
                 plainTextDataBlock.m_blockSize = blockSize;
 
                 // Plain Text Data(n Byte)
                 plainTextDataBlock.m_plainTextData = new byte[plainTextDataBlock.m_blockSize];
-                for (int i = 0; i < plainTextDataBlock.m_plainTextData.Length; i++)
+                for (var i = 0; i < plainTextDataBlock.m_plainTextData.Length; i++)
                 {
                     plainTextDataBlock.m_plainTextData[i] = gifBytes[byteIndex];
                     byteIndex++;
                 }
 
                 if (plainTxtEx.m_plainTextDataList == null)
-                {
                     plainTxtEx.m_plainTextDataList = new List<PlainTextExtension.PlainTextDataBlock>();
-                }
                 plainTxtEx.m_plainTextDataList.Add(plainTextDataBlock);
             }
 
-            if (gifData.m_plainTextExList == null)
-            {
-                gifData.m_plainTextExList = new List<PlainTextExtension>();
-            }
+            if (gifData.m_plainTextExList == null) gifData.m_plainTextExList = new List<PlainTextExtension>();
             gifData.m_plainTextExList.Add(plainTxtEx);
         }
 
@@ -590,30 +584,26 @@ namespace UnityGif
             while (true)
             {
                 // Block Size (1 Byte)
-                byte blockSize = gifBytes[byteIndex];
+                var blockSize = gifBytes[byteIndex];
                 byteIndex++;
 
                 if (blockSize == 0x00)
-                {
                     // Block Terminator(1 Byte)
                     break;
-                }
 
                 var appDataBlock = new ApplicationExtension.ApplicationDataBlock();
                 appDataBlock.m_blockSize = blockSize;
 
                 // Application Data(n Byte)
                 appDataBlock.m_applicationData = new byte[appDataBlock.m_blockSize];
-                for (int i = 0; i < appDataBlock.m_applicationData.Length; i++)
+                for (var i = 0; i < appDataBlock.m_applicationData.Length; i++)
                 {
                     appDataBlock.m_applicationData[i] = gifBytes[byteIndex];
                     byteIndex++;
                 }
 
                 if (gifData.m_appEx.m_appDataList == null)
-                {
                     gifData.m_appEx.m_appDataList = new List<ApplicationExtension.ApplicationDataBlock>();
-                }
                 gifData.m_appEx.m_appDataList.Add(appDataBlock);
             }
         }
