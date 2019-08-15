@@ -1,4 +1,4 @@
-UniGif
+UniGif [![HitCount](http://hits.dwyl.io/uta-org/UniGif.svg)](http://hits.dwyl.io/uta-org/UniGif)
 ======
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/mit-license.php)
