@@ -3,11 +3,11 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Extensions;
-using UnityEngine.ExternalCode.Extensions;
 using UnityEngine.Global.IMGUI;
 using UnityEngine.UI.Effects;
 using uzLib.Lite.ExternalCode.Extensions;
 using Object = UnityEngine.Object;
+using RectHelper = uzLib.Lite.ExternalCode.Extensions.RectHelper;
 
 namespace UnityGif.Editor
 {

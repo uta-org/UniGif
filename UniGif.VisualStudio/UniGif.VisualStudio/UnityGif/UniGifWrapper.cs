@@ -6,10 +6,13 @@ using System.Linq;
 using System.Text;
 using CielaSpike;
 using UnityEngine;
-using UnityEngine.Extensions;
-using UnityEngine.ExternalCode.Extensions;
 using UnityEngine.Networking;
 using uzLib.Lite.ExternalCode.Extensions;
+
+#if !(!UNITY_2020 && !UNITY_2019 && !UNITY_2018 && !UNITY_2017 && !UNITY_5)
+using uzLib.Lite.Extensions;
+using RectHelper = uzLib.Lite.ExternalCode.Extensions.RectHelper;
+#endif
 
 namespace UnityGif
 {
