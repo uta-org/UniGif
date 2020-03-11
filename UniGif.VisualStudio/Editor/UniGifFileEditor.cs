@@ -6,6 +6,7 @@ using UnityEngine.Extensions;
 using UnityEngine.Global.IMGUI;
 using UnityEngine.UI.Effects;
 using uzLib.Lite.ExternalCode.Extensions;
+using uzLib.Lite.ExternalCode.Utils;
 using Object = UnityEngine.Object;
 using RectHelper = uzLib.Lite.ExternalCode.Extensions.RectHelper;
 
@@ -334,12 +335,19 @@ namespace UnityGif.Editor
                 string path = (string)objs[1];
                 UniGif.GifFile gif = objs[2] as UniGif.GifFile;
 
+                if (gif != null && gif.IsInitFlag == false)
+                {
+                    var mono = MonoUtils.FindExecutingInEditModeMonoBehaviour();
+                    gif.Init(Path.GetFileNameWithoutExtension(path), mono, this);
+                }
+
                 isFoldout = property.isExpanded;
                 validPath = CheckValidGif(path);
 
                 if (validPath)
                 {
-                    gif.UpdateFromPath(path, this);
+                    if (gif == null) Debug.LogException(new ArgumentNullException(nameof(gif), "Null gif passed!"));
+                    gif?.UpdateFromPath(path, this);
                 }
             }
         }
