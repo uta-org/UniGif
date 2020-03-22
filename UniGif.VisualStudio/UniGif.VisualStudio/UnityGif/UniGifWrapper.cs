@@ -175,7 +175,7 @@ namespace UnityGif
             public GifFile(string name, MonoBehaviour mono, byte[] array, object editorInstance)
                 : this(mono)
             {
-                Debug.Log($"Creating instance with name {name}");
+                //Debug.Log($"Creating instance with name '{name}'");
 
                 m_editorInstance = editorInstance;
                 _LoadFrom(name, array, null);
