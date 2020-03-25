@@ -8,6 +8,7 @@ using CielaSpike;
 using UnityEngine;
 using UnityEngine.Networking;
 using uzLib.Lite.ExternalCode.Extensions;
+using uzLib.Lite.ExternalCode.Unity.Extensions;
 
 #if !(!UNITY_2020 && !UNITY_2019 && !UNITY_2018 && !UNITY_2017 && !UNITY_5)
 using uzLib.Lite.Extensions;
@@ -23,9 +24,9 @@ namespace UnityGif
         [Obsolete]
         public static void LoadFromListOf(this MonoBehaviour mono, params GifFile[] gifs)
         {
-            if (mono == null) throw new ArgumentException("mono");
+            if (mono == null) throw new ArgumentNullException(nameof(mono));
 
-            if (gifs == null || gifs != null && gifs.Length == 0) throw new ArgumentException("gifs");
+            if (gifs == null || gifs != null && gifs.Length == 0) throw new ArgumentNullException(nameof(gifs));
 
             foreach (var gif in gifs) LoadFrom(mono, gif.path);
         }
@@ -33,9 +34,9 @@ namespace UnityGif
         [Obsolete]
         public static void LoadFrom(this MonoBehaviour mono, GifFile gif)
         {
-            if (mono == null) throw new ArgumentException("mono");
+            if (mono == null) throw new ArgumentNullException(nameof(mono));
 
-            if (gif == null) throw new ArgumentException("gif");
+            if (gif == null) throw new ArgumentNullException(nameof(gif));
 
             LoadFrom(mono, gif.path);
         }
@@ -43,18 +44,18 @@ namespace UnityGif
         [Obsolete]
         public static void LoadFromListOf(this MonoBehaviour mono, params string[] paths)
         {
-            if (mono == null) throw new ArgumentException("mono");
+            if (mono == null) throw new ArgumentNullException(nameof(mono));
 
-            if (paths == null || paths != null && paths.Length == 0) throw new ArgumentException("paths");
+            if (paths == null || paths != null && paths.Length == 0) throw new ArgumentNullException(nameof(paths));
 
             foreach (var path in paths) LoadFrom(mono, path);
         }
 
         public static void LoadFrom(this MonoBehaviour mono, string path)
         {
-            if (mono == null) throw new ArgumentException("mono");
+            if (mono == null) throw new ArgumentNullException(nameof(mono));
 
-            if (string.IsNullOrEmpty(path)) throw new ArgumentException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
 
             if (path.StartsWith("http"))
             {
@@ -163,7 +164,7 @@ namespace UnityGif
 
             public GifFile(MonoBehaviour mono)
             {
-                this.mono = mono ? mono : throw new ArgumentNullException(nameof(mono));
+                this.mono = mono ?? throw new ArgumentNullException(nameof(mono));
             }
 
             public GifFile(string name, MonoBehaviour mono, byte[] array)
@@ -293,6 +294,9 @@ namespace UnityGif
                     //    callback?.Invoke();
                     //};
 
+                    // Update mono in case this is null
+                    // ReSharper disable once RedundantNameQualifier
+                    if (!mono.gameObject.activeInHierarchy) mono = uzLib.Lite.ExternalCode.Unity.Extensions.ObjectHelper.GetActiveMonoBehaviour() ?? mono;
                     MainRoutine(name, array, m_editorInstance, Finish).StartSmartCorotine(m_editorInstance, mono);
                 }
                 catch (Exception ex)

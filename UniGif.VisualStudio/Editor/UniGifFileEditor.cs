@@ -196,16 +196,14 @@ namespace UnityGif.Editor
                             validPath = CheckValidGif(path);
 
                             if (string.IsNullOrEmpty(path))
-                            {
                                 break;
-                            }
                         }
                         while (!validPath);
 
-                        if (validPath && path != gifPath)
+                        if (validPath && path != gifPath && !string.IsNullOrEmpty(path))
                         {
                             // Do something when the property changes
-                            gif.UpdateFromPath(gifPath, this);
+                            gif?.UpdateFromPath(gifPath, this);
 
                             SetFirstFrame(gif);
                         }
