@@ -32,6 +32,8 @@ namespace UnityGif
             return newArray.ToNumeral();
         }
 
+        //#if !UNITY_2020 && !UNITY_2019 && !UNITY_2018 && !UNITY_2017 && !UNITY_5
+
         /// <summary>
         ///     Convert BitArray to int
         /// </summary>
@@ -54,5 +56,7 @@ namespace UnityGif
             array.CopyTo(result, 0);
             return result[0];
         }
+
+        //#endif
     }
 }
